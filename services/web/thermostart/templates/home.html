@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ThermoSmart</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="icon" href="static/images/favicon.png">
+    <link rel="stylesheet" href="static/lib/jquery-ui-1.8.16.custom.css">
+    <link rel="stylesheet" href="static/lib/grey.css">
+    <link rel="stylesheet" href="static/lib/selectordie.css">
+    <link rel="stylesheet" href="static/css/general.css">
+    <link rel="stylesheet" href="static/css/basic-layout.css">
+    <link rel="stylesheet" href="static/css/navigation.css">
+    <link rel="stylesheet" href="static/css/top-bar.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <link rel="stylesheet" href="static/css/page-login.css">
+    <link rel="stylesheet" href="static/css/page-overview.css">
+    <link rel="stylesheet" href="static/css/page-exceptions.css">
+    <link rel="stylesheet" href="static/css/page-standard-week.css">
+    <link rel="stylesheet" href="static/css/dialog.css">
+    <link rel="stylesheet" href="static/css/dim-toggle.css">
+    <link rel="stylesheet" href="static/css/firmware-toggle.css">
+    <link rel="stylesheet" href="static/css/statusled-toggle.css">
+    <link rel="stylesheet" href="static/css/display-mode-toggle.css">
+    <link rel="stylesheet" href="static/css/locale-toggle.css">
+    <link rel="stylesheet" href="static/css/schedule.css">
+    <link rel="stylesheet" href="static/css/settings.css">
+    <script src="static/js/i18n.js"></script>
+</head>
+
+<body>
+
+    <div id="container" class="navigation-exceptions">
+
+        <div id="top-bar">
+          <div id="logo" class="availability-indicator available"></div>
+          <div class="navigation">
+              <ul id="navigation-links">
+                  <li><a href="/ui#home">Overview</a></li>
+                  <li><a href="/ui#exceptions">Agenda</a></li>
+                  <li><a href="/ui#standard-week">Schedule</a></li>
+              </ul>
+              <div id="login-info">
+                  <a class="link-settings" href="ui#settings"><i class="icon icon-settings"></i></a>
+                  <a href="/account">
+                      <i class="icon icon-user-small"></i>
+                      <span></span>
+                  </a>
+                  <a class="link-logout" href="logout"><i class="icon icon-leave"></i></a>
+              </div>
+          </div>
+        </div>
+
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    {% include 'includes/dialogs.html' %}
+
+    <script src="static/lib/jquery-1.7.1.js"></script>
+    <script src="static/lib/jquery-ui-1.8.16.custom.min.js"></script>
+    <script src="static/lib/jquery.ui.datepicker-nl.js"></script>
+    <script src="static/lib/underscore-1.5.2.min.js"></script>
+    <script src="static/lib/backbone-1.0.0.min.js"></script>
+    <script src="static/lib/moment.min.js"></script>
+    <script src="static/lib/moment-round.min.js"></script>
+    <script src="static/lib/jquery.flot.min.js"></script>
+    <script src="static/lib/jquery.flot.time.min.js"></script>
+    <script src="static/lib/icheck.min.js"></script>
+    <script src="static/lib/selectordie.min.js"></script>
+    <script src="static/lib/socket.io.min.js"></script>
+    <script src="static/lib/keyboard.js"></script>
+    <script src="static/js/config.js"></script>
+    <script src="static/js/util.js"></script>
+    <script src="static/js/ThermostatModel.js"></script>
+    <script src="static/js/dialogs.js"></script>
+    <script src="static/js/WeatherView.js"></script>
+    <script src="static/js/ScheduleView.js"></script>
+    <script src="static/js/StandardWeek.js"></script>
+    <script src="static/js/Exceptions.js"></script>
+    <script src="static/js/Overview.js"></script>
+    <script src="static/js/DirectTemperatureSetter.js"></script>
+    <script src="static/js/ProgramBlock.js"></script>
+    <script src="static/js/CurrentProgram.js"></script>
+    <script src="static/js/PauseButton.js"></script>
+    <script src="static/js/DimToggle.js"></script>
+    <script src="static/js/StatusledToggle.js"></script>
+    <script src="static/js/LocaleToggle.js"></script>
+    <script src="static/js/DisplayModeToggle.js"></script>
+    <script src="static/js/FirmwareToggle.js"></script>
+    <script src="static/js/AutoPauseToggle.js"></script>
+    <script src="static/js/AutoPauseDevices.js"></script>
+    <script src="static/js/temperatureCalibration.js"></script>
+    <script src="static/js/Schedule.js"></script>
+    <script src="static/js/OpenTherm.js"></script>
+    <script src="static/js/ithermostat.js"></script>
+</body>
+
+</html>

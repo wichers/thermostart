@@ -1,0 +1,26 @@
+The ICSP (or "In-Circuit Serial Programming" header allows you to re-program the
+PIC24FJ256GA110 without removing it from the circuit it's embedded in. The
+pinout is as following:
+
+                         1 2 3 4
+                          5 6 7
+
+  1 = MCLR - pin 13
+  2 = VSS - pin 15
+  3 = PGEC1/AN1/RP1/CN3/RB1 - pin 24 / ICSP Programming Clock
+  4 = NC
+  5 = VDD - pin 16
+  6 = PGED1/AN0/RP0/CN2/RB0 - pin 25 / ICSP Programming Data
+  7 = NC
+  
+  
+  PICkit2:
+  1 = VPP/MCLR
+  2 = VDD
+  3 = VSS
+  4 = PGD
+  5 = PGC
+
+Note: On hardware version 4, pin 4 and 7 are unconnected. As there is UART
+debugging functionality in the firmware it is very likely that on other hardware
+versions these pins are UART connected.

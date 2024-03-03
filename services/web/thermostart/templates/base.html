@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Login</title>
+    <link rel="icon" href="static/images/favicon.png">
+    <link rel="stylesheet" href="static/css/general.css">
+    <link rel="stylesheet" href="static/css/basic-layout.css">
+    <link rel="stylesheet" href="static/css/navigation.css">
+    <link rel="stylesheet" href="static/css/top-bar.css">
+    <link rel="stylesheet" href="static/css/footer.css">
+    <link rel="stylesheet" href="static/css/page-login.css">
+    <link rel="stylesheet" href="static/css/dialog.css">
+    <script src="static/lib/jquery-1.7.1.js"></script>
+    <script src="static/lib/underscore-1.5.2.min.js"></script>
+    <script src="static/lib/backbone-1.0.0.min.js"></script>
+    <script src="static/js/i18n.js"></script>
+    <script src="static/js/ProfileView.js"></script>
+    <meta http-equiv="origin-trial">
+</head>
+
+<body>
+    <div id="container">
+
+        <div id="top-bar">
+            <div id="logo"></div>
+            <div class="navigation">
+                <ul id="navigation-links" class="disabled">
+                    <li>Overview</li>
+                    <li>Agenda</li>
+                    <li>Schedule</li>
+                </ul>
+                <div id="login-info">
+                    <a class="link-settings" href="/login#"><i class="icon icon-settings"></i></a>
+                    <a href="/login#">
+                        <i class="icon icon-user-small"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+</body>
+
+</html>

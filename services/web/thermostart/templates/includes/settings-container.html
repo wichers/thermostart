@@ -1,0 +1,206 @@
+<div id="settings-container">
+    <div class="window-large">
+        <div class="settings-container">
+            <h2>Settings - {{session['hwid']}}</h2>
+            <div class="widgets large">
+
+<!---
+                <div id="profile-container" class="widget form">
+                    <div class="left">
+                        <i class="icon icon-user"></i>
+                        <h5>Device Profile</h5>
+                        <ul>
+                            <li><span data-tip="Choose &quot;Custom&quot; only if you use a wood or oil fired boiler.">Heating system</span></li>
+                            <li class="heating-system-custom-section"><small data-tip="Switching based on a hysteresis or modulated switching.">On / off switching method</small></li>
+                            <li class="heating-system-custom-section"><small data-tip="Switching point as a deviation from the desired temperature. The default is 0.3 degrees.">Hysteresis</small></li>
+                            <li class="heating-system-custom-section"><small data-tip="The standard is 6 cycles per hour. Consult the manual of your heater for the correct value.">Cycles Per Hour</small></li>
+                        </ul>
+                    </div>
+                    <div class="right">
+                        <form action="/profile" method="POST" autocomplete="off">
+                            <div class="field">
+                                <select placeholder="" name="heating_system" autocomplete="off">
+                                    <option value="boiler">Default setting</option>
+                                    <option value="nathan_lwdv_heatpump">Alpha innotec Heatpump</option>
+                                    <option value="custom">Custom On/Off Setting</option>
+                                </select>
+                            </div>
+                            <div class="field heating-system-custom-section">
+                                <input type="radio" id="hysteresis_enabled_no" name="hysteresis_enabled" value="no" />
+                                <label for="hysteresis_enabled_no">Modulating</label>
+                                <input type="radio" id="hysteresis_enabled_yes" name="hysteresis_enabled" value="yes" />
+                                <label for="hysteresis_enabled_yes">Hysteresis</label>
+                            </div>
+                            <div class="field heating-system-custom-section">
+                                <input type="number" value="" placeholder="0.3" min="0" max="5" step="0.1" name="hysteresis" autocomplete="off" disabled="disabled" />
+                            </div>
+                            <div class="field heating-system-custom-section">
+                                <input type="number" value="" placeholder="3" min="1" max="60" step="1" name="cyclesPerHour" autocomplete="off" />
+                            </div>
+                            <div>
+                                <input type="submit" value="Change" />
+                              </div>
+                        </form>
+                    </div>
+                </div>
+--->
+
+                <div class="display-locale widget" style="height: 240px">
+                    <div class="left">
+                        <i class="icon icon-locale"></i>
+                        <h5>Display language</h5>
+                        <p>Adjust the language of the display</p>
+                    </div>
+                    <div class="right">
+                        <div class="locale-toggle">
+                            <div class="radio-button">
+                                <div class="iradio_minimal-grey"><input type="radio" name="locale-mode" value="nl-NL"></div><label data-tip="Set display locale to Dutch.">Dutch (Standard)</label>
+                            </div>
+                            <div class="radio-button">
+                                <div class="iradio_minimal-grey"><input type="radio" name="locale-mode" value="nl-BE"></div><label data-tip="Set display locale to Belgium.">Dutch (Belgium)</label>
+                            </div>
+                            <div class="radio-button">
+                                <div class="iradio_minimal-grey"><input type="radio" name="locale-mode" value="en-GB"></div><label data-tip="Set display locale to English.">English (United Kingdom)</label>
+                            </div>
+                            <div class="radio-button">
+                                <div class="iradio_minimal-grey"><input type="radio" name="locale-mode" value="fr-FR"></div><label data-tip="Set display locale to French.">French (Standard)</label>
+                            </div>
+                            <div class="radio-button">
+                                <div class="iradio_minimal-grey"><input type="radio" name="locale-mode" value="fr-BE"></div><label data-tip="Set display locale to French (Belgium).">French (Belgium)</label>
+                            </div>
+                            <div class="radio-button">
+                                <div class="iradio_minimal-grey"><input type="radio" name="locale-mode" value="de-DE"></div><label data-tip="Set display locale to German.">German (Standard)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="display-dimming widget">
+                    <div class="left">
+                        <i class="icon icon-dim"></i>
+                        <h5>Display brightness</h5>
+                        <p>Adjust the brightness of the display as shown in standby mode</p>
+                    </div>
+                    <div class="right">
+                        <div class="dim-toggle control-set-dim">
+                            <span class="dim">100</span>
+                            <div class="button button-higher">
+                                <i class="icon icon-brighter"></i>
+                            </div>
+                            <div class="button button-lower">
+                                <i class="icon icon-darker"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="temperature-calibration widget form">
+                    <div class="left">
+                      <i class="icon icon-calibration"></i>
+                      <h5>Thermostat Calibration</h5>
+                      <p>Thermostat calibration ensures accurate temperature readings and efficient operation.</p>
+                    </div>
+                    <div class="right">
+                      <div class="temperature-calibration-toggle control-set-temperature">
+                        <span class="temperature">0</span>
+                        <div class="button button-higher">
+                          <i class="icon icon-plus"></i>
+                        </div>
+                        <div class="button button-lower">
+                          <i class="icon icon-minus"></i>
+                        </div>
+                      </div>
+            
+                    </div>
+                </div>
+            
+
+                <div class="statusled-mode widget" style="height: 245px">
+                    <div class="left">
+                        <i class="icon icon-led"></i>
+                        <h5>Status</h5>
+                        <p>Display messages on the LED</p>
+
+                        <p class="display-mode-header">Text on display</p>
+
+                    </div>
+                    <div class="right">
+                        <div class="statusled-mode-toggle">
+                            <div class="radio-button">
+                                <div class="iradio_minimal-grey"><input type="radio" name="statusled-mode" value="2"></div><label data-tip="Status LED glows on boiler activity, when new temperature is set and flashes to indicate errors (Default).">On</label>
+                            </div>
+                            <div class="radio-button">
+                                <div class="iradio_minimal-grey"><input type="radio" name="statusled-mode" value="0"></div><label data-tip="Status LED is off.">Off</label>
+                            </div>
+                            <div class="radio-button">
+                                <div class="iradio_minimal-grey"><input type="radio" name="statusled-mode" value="1"></div><label data-tip="Status LED displays only errors.">Error messages only</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <br>
+
+                    <div class="right">
+                        <div class="display-mode-toggle">
+                            <div class="radio-button">
+                                <div class="iradio_minimal-grey"><input type="radio" name="display-mode" value="0"></div><label>Temperature</label>
+                            </div>
+                            <div class="radio-button">
+                                <div class="iradio_minimal-grey"><input type="radio" name="display-mode" value="1"></div><label>Clock</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div id="firmware-container" class="widget form">
+                    <div class="left">
+                        <i class="icon icon-settings"></i>
+                        <h5>Download custom firmware</h5>
+                        <ul>
+                            <li><span data-tip="Domainname the Thermosmart will use for HTTP communication.">Domain-name/ip-address</span></li>
+                            <li><span data-tip="The HTTP Port the Thermosmart uses to communicate.">HTTP TCP Port</span></li>
+                            <li><span data-tip="When you restart your device you see a version number. The 4th digit indicates your hardware version. For ex. 30020004 denotes hardware version 2.">Hardware version</span></li>
+                        </ul>
+                        <p></p>
+                    </div>
+                    <div class="right">
+                        <div class="firmware-toggle">
+                            <form action="/firmware" method="POST" autocomplete="off">
+                                <div class="field">
+                                    <input type="text" value="" name="host">
+                                </div>
+                                <div class="field">
+                                    <input type="number" value="" placeholder="" min="1" max="65535" step="1" name="port">
+                                </div>
+
+                                <div class="field">
+                                    <select placeholder="" name="version" autocomplete="off">
+                                        <option value="0">- Select hardware version -</option>
+                                        <option value="1">HW1 (20141018)</option>
+                                        <option value="3">HW3 (30030030)</option>
+                                        <option value="4">HW4 (30040030)</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <button class="btn btn-download"><img src="static/images/icon_Download.png"/></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="widget">
+                    <div class="left"></div>
+                    <div class="right"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

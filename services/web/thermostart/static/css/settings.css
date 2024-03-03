@@ -1,0 +1,201 @@
+#settings-container .window-large {
+    height: auto;
+}
+
+.settings-container {
+    display: inline-block;
+    width: 100%;
+}
+
+.settings-container .temperature-calibration-toggle, .settings-container .dim-toggle {
+    margin: 45px 15px;
+    width: 200px;
+}
+
+.settings-container .locale-toggle > div,
+.settings-container .statusled-mode-toggle > div,
+.settings-container .display-mode-toggle > div {
+    margin: 8px;
+}
+.settings-container .locale-toggle label,
+.settings-container .statusled-mode-toggle label,
+.settings-container .display-mode-toggle label {
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+
+.statusled-mode.widget .right {
+    padding-top: 35px;
+}
+
+.widgets.large .statusled-mode.widget {
+    height: 130px;
+}
+.widgets.large .statusled-mode.widget .display-mode-header {
+    margin-top: 80px;
+}
+
+#firmware-container {
+    height: 280px;
+}
+
+#firmware-container.widget .btn-download {
+    width: 200px;
+    margin: 15px;
+}
+
+.factory-reset.widget .btn-reset-standard-week,
+.factory-reset.widget .btn-remove-profile {
+    width: 200px;
+    margin: 15px;
+}
+
+.settings-container .widget.api-apps {
+    height: 200px;
+
+    height: auto;
+    background-color: #fafafa;
+}
+.settings-container .widget.api-apps > .right {
+    background-color: white;
+    width: 640px;
+    margin-bottom: -4px;
+    padding-bottom: 10px;
+}
+
+.settings-container .api-apps .app {
+    border: 2px solid #eeeeee;
+    border-radius: 6px;
+    padding: 10px;
+    width: 150px;
+    height: 150px;
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.settings-container .api-apps .app-logo {
+    max-width: 100px;
+    max-height: 30px;
+    margin-bottom: 5px;
+}
+.settings-container .api-apps .app-name {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 4px;
+    display: inline-block;
+
+    width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.settings-container .api-apps a {
+    background-color: transparent;
+    margin: 0;
+    line-height: 1.2em;
+}
+.settings-container .api-apps .app-btn-revoke {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+}
+.settings-container .api-apps .btn-add-connection {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+}
+.settings-container .api-apps .app.tile-add:hover {
+    background-color: #eeeeee;
+}
+
+.settings-container .api-apps .tile-add {
+    background: url('../images/add_new_connection_icon.png') no-repeat center center;
+}
+
+.settings-container .auto-pause-devices.widget .right p {
+    margin: 15px;
+}
+.settings-container .auto-pause-toggle.widget .switch {
+    margin: 15px;
+}
+.settings-container .auto-pause-devices .device-status {
+    color: grey;
+}
+
+.settings-container .auto-pause-devices.widget {
+    height: auto;
+    background-color: #fafafa;
+}
+
+.settings-container .auto-pause-devices .right {
+    width: 640px;
+    background-color: white;
+    padding-bottom: 10px;
+    margin-bottom: -4px;
+}
+
+.settings-container .auto-pause-devices .device {
+    border: 2px solid #eeeeee;
+    border-radius: 6px;
+    padding: 10px;
+    width: 150px;
+    height: 150px;
+    margin-left: 20px;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+    float: left;
+}
+
+.settings-container .auto-pause-devices .device-logo {
+    max-width: 100px;
+    max-height: 30px;
+    margin-bottom: 5px;
+}
+.settings-container .auto-pause-devices .device-name {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 4px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.settings-container .auto-pause-devices .device-btn-remove {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+}
+.settings-container .auto-pause-devices .device.tile-add:hover {
+    background-color: #eeeeee;
+}
+.settings-container .auto-pause-devices .tile-add {
+    background: url('../images/add_new_connection_icon.png') no-repeat center center;
+}
+.settings-container .auto-pause-devices .btn-add-connection {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.hidden{
+    display: none;
+}
+
+.heating-system-custom-section {
+    display: none;
+}

@@ -1,0 +1,139 @@
+#logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 240px;
+    height: 60px;
+    background-image: url("../images/logo.png");
+    background-size: 240px 60px;
+}
+
+#logo.availability-indicator.available {
+    background-image: url("../images/logo.png");
+}
+
+.navigation {
+    font-size: 11pt;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    background-color: #ffffff;
+    padding: 2px;
+    position: absolute;
+    top: 32px;
+    right: 10px;
+    left: 260px;
+}
+
+#navigation-links {
+    display: inline-block;
+}
+
+#navigation-links > li {
+    display: inline-block;
+    list-style-type: none;
+    cursor: pointer;
+    text-align: center;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    margin-right: 20px;
+    line-height: 28px;
+}
+
+#navigation-links.disabled > li {
+    cursor: default;
+}
+
+#navigation-links > li a {
+    color: #666666;
+    text-decoration: none;
+    padding: 0 10px 0 10px;
+}
+
+#navigation-links.disabled > li {
+    color: #dedede;
+    padding: 0 10px 0 10px;
+}
+
+#login-info {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    background-color: #EEEEEE;
+    font-size: 10pt;
+    display: inline-block;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    bottom: 2px;
+    line-height: 28px;
+    min-width: 200px;
+}
+
+#login-info span {
+    margin-right: 50px;
+    color: #666666;
+}
+
+#login-info .icon-leave {
+    opacity: 0.5;
+}
+#login-info .link-settings {
+    position: absolute;
+    left: -31px;
+    top: 0px;
+    background-color: #EEEEEE;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    line-height: 28px;
+    text-align: center;
+}
+#login-info .icon-settings {
+    width: 28px;
+    height: 28px;
+    background-position: -1px -2px;
+}
+#login-info a {
+    color: #444444;
+    text-decoration: none;
+}
+#login-info .link-logout {
+    color: #444444;
+    text-decoration: none;
+    position: absolute;
+    right: 1px;
+    top: 0px;
+}
+
+
+/* ???
+
+#navigation-links > li:hover{
+    font-weight: bold;
+}
+
+#login-info a:hover {
+    font-weight: bold;
+}
+
+
+#navigation-links > li.forum {
+    width: 60px;
+    margin-right: -7px;
+}
+
+*/

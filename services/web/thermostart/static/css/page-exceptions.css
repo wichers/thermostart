@@ -1,0 +1,100 @@
+.exceptions-container {
+   padding-left: 20px;
+}
+
+.exceptions-date-picker .ui-datepicker{
+  width:13em;
+  border:none;
+}
+
+.exceptions-date-picker .ui-datepicker-header{
+  background: none;
+  border: none;
+}
+
+#exceptions-container .program-container .btn-change {
+   display: none;
+}
+
+#exceptions-container .days-container {
+   margin-top: -10px;   /* give some space to the dates that are rendered in JS */
+}
+
+#exceptions-container .exceptions-programs .touch-controls button {
+    margin: 5px 0;
+    width: 150px;
+}
+
+#exceptions-container .schedule-stencil-block-button {
+    width: 170px;
+}
+
+#exceptions-container .schedule-stencil-block-button > label {
+   font-size: 14px;
+}
+
+/* date picker */
+
+.exceptions-date-picker span {
+    color: #999999;
+}
+
+.exceptions-date-picker .ui-state-default {
+    background: none;
+    color: #999999;
+    border: 1px solid #F3F3F3;
+    text-align: center;
+}
+
+.exceptions-date-picker .ui-state-active {
+    background: none;
+    border: none;
+}
+
+.exceptions-date-picker .ui-state-highlight {
+    color: #666666;
+    font-weight: 600;
+    border: 1px solid #F3F3F3;
+}
+
+.exceptions-date-picker .ui-state-active a {
+    background: #dddddd;
+    color: #666666;
+}
+
+.exceptions-date-picker .ui-icon-circle-triangle-w {
+    opacity: 0.5;
+    background-position: -96px -16px;
+}
+
+.exceptions-date-picker .ui-icon-circle-triangle-e {
+    opacity: 0.5;
+    background-position: -32px -16px;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    border: none;
+    background: none;
+    color: #666;
+    top: 2px;
+}
+
+.ui-datapicker-next-hover {
+    left: 2px;
+}
+
+.ui-datapicker-prev-hover {
+    right: 2px;
+}
+
+.exceptions-container .schedule .block[data-custom="background"] .slice {
+   border-color: #eeeeee;
+   background-color: #eeeeee !important;
+   pointer-events: none;
+   z-index: 0;
+}
+
+.exceptions-container .schedule .block[data-custom="background"] .handle,
+.exceptions-container .schedule .block[data-custom="background"] .controls {
+    display: none;
+}

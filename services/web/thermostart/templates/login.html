@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="window-large">
+  <div class="window-container">
+      <h2>Welcome</h2>
+      <div class="widgets large">
+
+          <div id="register-container" class="widget form">
+              <div class="left">
+                  <h5>Signup</h5>
+                  <ul>
+                      <li>I'm a new device</li>
+                  </ul>
+              </div>
+              <div class="right">
+                  <div>
+                      <a href="/register" class="primary">Register a new device</a>
+                  </div>
+              </div>
+          </div>
+
+          <div id="login-container" class="widget form">
+              <div class="left">
+                  <h5>Sign-in</h5>
+                  <ul>
+                      <li>Hardware ID</li>
+                      <li>Password</li>
+                  </ul>
+              </div>
+              <div class="right">
+                  <form action="/login" method="POST" name="login">
+                      <div class="field">
+                          {{ form.hardware_id(placeholder="Hardware ID") }}
+                          {% if form.hardware_id.errors %}
+                          <div class="alert alert-error">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                        {% endif %}
+                      </div>
+                      <div class="field">
+                          {{ form.password(placeholder="Password") }}
+                          {% if form.password.errors %}
+                          <div class="alert alert-info">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                          {% endif %}
+                          </div>
+                      </div>
+                      <div class="controls">
+                          {{ form.submit() }}
+                      </div>
+                      {{ form.hidden_tag() }}
+                  </form>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>
+{% endblock content %}

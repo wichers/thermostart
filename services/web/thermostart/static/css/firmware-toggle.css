@@ -1,0 +1,17 @@
+.firmware-toggle {
+   margin: 0px 10px;
+}
+
+.firmware-toggle label {
+    font-size: 14px;
+    color: #666666;
+}
+
+.firmware-toggle input {
+    margin: 6px 10px 0 0;
+}
+
+.firmware-toggle submit {
+    width: 200px;
+    margin: 15px;
+}

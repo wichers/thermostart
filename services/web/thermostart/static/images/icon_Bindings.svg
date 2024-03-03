@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #101010;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="grid" class="cls-1" d="M1090,168h-6a2,2,0,0,1-2-2v-6a2,2,0,0,1,2-2h6a2,2,0,0,1,2,2v6A2,2,0,0,1,1090,168Zm0-8h-6v6h6v-6Zm0-6h-6a2,2,0,0,1-2-2v-6a2,2,0,0,1,2-2h6a2,2,0,0,1,2,2v6A2,2,0,0,1,1090,154Zm0-8h-6v6h6v-6Zm-14,22h-6a2,2,0,0,1-2-2v-6a2,2,0,0,1,2-2h6a2,2,0,0,1,2,2v6A2,2,0,0,1,1076,168Zm0-8h-6v6h6v-6Zm0-6h-6a2,2,0,0,1-2-2v-6a2,2,0,0,1,2-2h6a2,2,0,0,1,2,2v6A2,2,0,0,1,1076,154Zm0-8h-6v6h6v-6Z" transform="translate(-1068 -144)"/>
+</svg>

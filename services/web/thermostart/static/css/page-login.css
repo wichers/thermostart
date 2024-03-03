@@ -1,0 +1,39 @@
+#profile-container {
+    height: 390px;
+}
+
+#login-container{
+    height: 200px;
+}
+
+#user-links-container {
+    height: 300px;
+}
+
+.widget.links .left ul {
+    line-height: 52px;
+    font-size: 14px;
+}
+
+.widget.links .links-container {
+    padding-top: 28px;
+}
+
+#register-container {
+    height: 100px;
+}
+
+#register-container a.primary {
+    margin-top: 45px;
+}
+
+.widget.form .subscription-switch {
+    width: 20px;
+    margin: 15px 0 0 15px;
+}
+
+.widget.form  .subscription-switch.fetching-data {
+    opacity: 0.1;
+    pointer-events: none;
+}
+

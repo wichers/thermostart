@@ -1,0 +1,55 @@
+#container {
+  margin: auto;
+  width: 980px;
+}
+
+#top-bar {
+  position: relative;
+  height: 60px;
+}
+
+#content {
+  margin: 0 auto;
+  padding: 32px 10px 18px 10px;
+  position: relative;
+}
+
+#footer {
+  background-image: url("images/background-footer.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+  clear: both;
+  margin: auto;
+  width: 980px;
+  height: 237px;
+}
+
+.clear {
+  clear: both;
+}
+
+
+#opentherm-container {
+   padding: 50px;
+   text-align: center;
+}
+
+#opentherm-container table {
+   border: 1px solid lightgray;
+   margin-top: 20px;
+   padding: 20px;
+   display: inline-block;
+}
+
+#opentherm-container thead {
+   font-weight: bold;
+}
+
+#opentherm-container table td {
+   border-bottom: 1px solid lightgray;
+   padding: 5px;
+}
+
+.device-tablet .block.small .slice .label {
+   display: none;
+}

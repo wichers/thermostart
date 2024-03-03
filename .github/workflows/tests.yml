@@ -1,0 +1,46 @@
+name: Python Tests
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11.3]
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: github_actions
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r services/web/requirements.txt
+          pip install pytest
+      - name: Test code
+        env:
+          SECRET_KEY: 9971fcdasf79agwiog4ba406bcaa2353234ds3tgd
+          DEBUG: False
+          ALLOWED_HOSTS: "127.0.0.1"
+          POSTGRES_DB: github_actions
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/github_actions
+          FLASK_APP: thermostart
+        run: |
+          python services/web/manage.py create_db
+          pytest --disable-warnings

@@ -1,0 +1,52 @@
+.footer {
+   width: 960px;
+   height: 200px;
+   margin: 0 auto;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+   background: #FFFFFF;
+   font-size: 12px;
+}
+
+.footer .section-headers {
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px dashed #dedede;
+}
+
+.footer .section-header {
+    float: left;
+    width: 25%;
+}
+
+.footer .section-header > h2 {
+    border-bottom: none;
+}
+
+.footer .section-header.social-networks > a {
+    padding: 10px 10px 0 5px;
+    float: right;
+}
+
+.footer .section {
+   width: 25%;  /* 240px */
+   float: left;
+   padding: 10px 20px;
+   box-sizing: border-box;
+}
+
+.footer .section a {
+   color: #999999;
+   text-decoration: none;
+   line-height: 1.8em;
+   font-size: 1.1em;
+}
+
+.footer a:hover {
+   text-decoration: underline;
+}
+
+.footer ul {
+   list-style-type: none;
+}

@@ -1,0 +1,12 @@
+.display-mode-toggle {
+   margin: 10px 15px;
+}
+
+.display-mode-toggle label {
+    font-size: 14px;
+    color: #666666;
+}
+
+.display-mode-toggle input {
+    margin: 6px 10px 0 0;
+}

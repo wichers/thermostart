@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="window-large">
+  <div class="window-container">
+    <h2>Registration</h2>
+    <div class="widgets large">
+      <div id="profile-container" class="widget form">
+        <div class="left">
+          <i class="icon icon-user"></i>
+          <h5>My Profile</h5>
+          <ul>
+            <li>Hardware ID</li>
+            <li>Country</li>
+            <li>City</li>
+            <li>Password</li>
+            <li>Confirm password</li>
+          </ul>
+        </div>
+        <div class="right">
+          <form action="/register" method="POST" autocomplete="off">
+            <div id="location-map"></div>
+            {% if form.hardware_id.errors %}
+            <div class="field field-error">
+            {% else %}
+            <div class="field">
+            {% endif %}
+             {{ form.hardware_id(placeholder="Hardware ID") }}
+            {% if form.hardware_id.errors %}
+            <div class="alert alert-error">
+              {% for error in form.hardware_id.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            </div>
+
+            {% if form.country.errors %}
+            <div class="field field-error">
+            {% else %}
+            <div class="field">
+            {% endif %}
+              {{ form.country(placeholder="Country", autocomplete="country") }}
+            {% if form.country.errors %}
+            <div class="alert alert-error">
+              {% for error in form.country.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            </div>
+
+            {% if form.city.errors %}
+            <div class="field field-error">
+            {% else %}
+            <div class="field">
+            {% endif %}
+              {{ form.city(placeholder="City", autocomplete="city") }}
+            {% if form.city.errors %}
+            <div class="alert alert-error">
+              {% for error in form.city.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            </div>
+
+            {% if form.password.errors %}
+            <div class="field field-error">
+            {% else %}
+            <div class="field">
+            {% endif %}
+              {{ form.password(placeholder="Password", autocomplete="new-password") }}
+            {% if form.password.errors %}
+            <div class="alert alert-error">
+              {% for error in form.password.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            </div>
+
+            {% if form.confirm_password.errors %}
+            <div class="field field-error">
+            {% else %}
+            <div class="field">
+            {% endif %}
+              {{ form.confirm_password(placeholder="Password", autocomplete="new-password") }}
+            {% if form.confirm_password.errors %}
+            <div class="alert alert-error">
+              {% for error in form.confirm_password.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            </div>
+
+            <div>
+            {{ form.submit() }}
+            </div>
+            {{ form.hidden_tag() }}
+          </form>
+        </div>
+      </div>
+      <div class="widget">
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

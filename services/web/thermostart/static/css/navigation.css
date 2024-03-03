@@ -1,0 +1,28 @@
+#overview-container,
+#exceptions-container,
+#standard-week-container,
+#settings-container,
+#opentherm-container {
+    display: none;
+}
+
+.navigation-overview #overview-container,
+.navigation-exceptions #exceptions-container,
+.navigation-ot #opentherm-container,
+.navigation-settings #settings-container,
+.navigation-standard-week #standard-week-container {
+    display: block;
+}
+
+.navigation-account #navigation-links a[href="/account"],
+.navigation-overview #navigation-links a[href="/ui#home"],
+.navigation-exceptions #navigation-links a[href="/ui#exceptions"],
+.navigation-ot #navigation-links a[href="/ui#ot"],
+.navigation-settings #navigation-links a[href="/ui#settings"],
+.navigation-standard-week #navigation-links a[href="/ui#standard-week"] {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background: #EEEEEE;
+    display: inline-block;
+}

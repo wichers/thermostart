@@ -1,0 +1,234 @@
+/************ dialog generic ************/
+
+.dialog{
+    position: fixed;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    z-index: 100;
+    display: none;
+}
+
+.show-predefined-temperatures-dialog #dialog-predefined-temperatures,
+.show-edit-dialog-standard-week #dialog-edit-standard-week,
+.show-edit-dialog-exceptions #dialog-edit-exceptions{
+    display: block;
+}
+
+.dialog-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 6;
+    background-color: transparent;
+}
+
+.dialog-window{
+    position: relative;
+    margin: 300px auto 0px;
+    width: 350px;
+    -o-box-shadow: -4px 4px 2px -2px rgba(0,0,0,0.2);
+    -moz-box-shadow: -4px 4px 2px -2px rgba(0,0,0,0.2);
+    -khtml-box-shadow: -4px 4px 2px -2px rgba(0,0,0,0.2);
+    -webkit-box-shadow: -4px 4px 2px -2px rgba(0,0,0,0.2);
+    box-shadow: -4px 4px 2px -2px rgba(0,0,0,0.2);
+    background: #ffffff;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid #dedede;
+    z-index: 7;
+}
+
+/************ dialog predefined temperatures ************/
+
+#dialog-predefined-temperatures .dialog-title{
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin: 50px 0 0;
+}
+#dialog-predefined-temperatures .dialog-title.anti_freeze{
+  color: #172892;
+}
+#dialog-predefined-temperatures .dialog-title.not_home,
+#dialog-predefined-temperatures .dialog-title.pause{
+  color: #6b96ca;
+}
+#dialog-predefined-temperatures .dialog-title.home{
+  color: #db680a;
+}
+#dialog-predefined-temperatures .dialog-title.comfort{
+  color: #cd3626;
+}
+
+#dialog-predefined-temperatures .set-temperature{
+    margin: 40px 0 0;
+    text-align: center;
+}
+#dialog-predefined-temperatures .set-temperature span{
+    line-height: 12px;
+}
+#dialog-predefined-temperatures .set-temperature select {
+    text-align: center;
+    width: 127px;
+    margin-left: 26px;
+}
+
+
+/******* dialog buttons ********/
+
+.dialog h4 {
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    background-color: #31baf9;
+    color: white;
+    width: 335px;
+    margin-top: 0;
+    padding-left: 15px;
+    line-height: 40px;
+    font-size: 18px;
+}
+
+.dialog input {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #eeeeee;
+    color: #666;
+    font-size: 14px;
+    float: right;
+    width: 130px;
+}
+
+.dialog select {
+    height: 30px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #eeeeee;
+    border: 1px solid #eeeeee;
+    color: #666666;
+    font-size: 14px;
+    float: right;
+}
+
+#dialog-edit-program[data-type="anti_freeze"] .program-name {
+    background: #0097dd;
+}
+#dialog-edit-program[data-type="not_home"] .program-name {
+    background: #31baf9;
+}
+#dialog-edit-program[data-type="home"] .program-name {
+    background: #FF8000;
+}
+#dialog-edit-program[data-type="comfort"] .program-name {
+    background: #FF4800;
+}
+#dialog-edit-program[data-type="pause"] .program-name {
+    background-color: #eeeeee;
+    color: #666666;
+}
+#dialog-edit-program .dialog-window {
+    margin: 0 auto;
+    left: 80px;
+}
+
+#dialog-edit-program[data-type="anti_freeze"] .dialog-window {
+    top: 236px;
+}
+#dialog-edit-program[data-type="not_home"] .dialog-window {
+    top: 282px;
+}
+#dialog-edit-program[data-type="home"] .dialog-window {
+    top: 333px;
+}
+#dialog-edit-program[data-type="comfort"] .dialog-window {
+    top: 378px;
+}
+#dialog-edit-program[data-type="pause"] .dialog-window {
+    top: 550px;
+}
+
+#dialog-edit-program .set-dhw .radio-button {
+    margin-top: 10px;
+}
+#dialog-edit-program .set-dhw .radio-button label {
+    margin-left: 5px;
+}
+
+.dialog .widget .left {
+    width: 140px;
+    text-align: right;
+    padding-right: 20px;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.dialog .control-set-temperature {
+    width: 130px;
+}
+
+
+
+.dialog .widget.buttons {
+    border-bottom: none;
+}
+
+.dialog-buttons {
+    text-align: center;
+    margin: 10px auto;
+}
+
+.dialog-buttons button {
+    margin: 0 10px;
+}
+
+#dialog-app-revoke .dialog-window .app-info {
+    font-size: 14px;
+    position: relative;
+    top: 7px;
+
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#dialog-app-revoke .dialog-window > .widget {
+    border-bottom: none;
+}
+
+#dialog-device-remove .dialog-window .device-info {
+    font-size: 14px;
+    position: relative;
+    top: 7px;
+
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#dialog-device-remove small {
+    font-size: 80%;
+}
+
+#dialog-device-remove .dialog-window > .widget {
+    border-bottom: none;
+}
+
+.dialog .widget .left a {
+    display: list-item;
+    color: #2ab4f3;
+    background-color: transparent;
+    width: auto;
+    margin: 0;
+    text-align: right;
+    font-size: 0.8em;
+    text-decoration: underline;
+    line-height: initial;
+}

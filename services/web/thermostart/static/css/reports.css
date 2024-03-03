@@ -1,0 +1,46 @@
+#reports-container .reports-default-periods button {
+    width: 200px;
+    margin: 15px;
+}
+#reports-container .reports-default-periods .button-period.active {
+    background-color: #12C0F3;
+    color: white;
+}
+#reports-container .reports-container {
+    display: inline-block;
+    width: 100%;
+}
+#reports-container .reports-chart-area {
+    position: relative;
+    padding: 20px;
+}
+#reports-container .reports-chart {
+    width: 900px;
+    height: 500px;
+}
+#reports-container .reports-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    opacity: .7;
+    text-align: center;
+    line-height: 450px;
+    vertical-align: middle;
+    font-size: 24px;
+}
+#reports-container .widget-default-period {
+    border-bottom: none;
+}
+#reports-container .widget-custom-period {
+    top: -25px;
+}
+#reports-container .reports-electricity-chart {
+    margin-top: 50px;
+}
+
+.plotly-notifier {
+    visibility: hidden;
+}

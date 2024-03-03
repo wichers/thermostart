@@ -1,0 +1,72 @@
+<div id="overview-container">
+    <div id="current-week-container">
+        <div class="window-large">
+
+            <div class="week-container">
+                <h2>Current week overview</h2>
+                <div class="overview-container"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="temperature-now-container">
+
+        <div class="widget">
+            <h3>Current program</h3>
+            <div class="left">
+                <i id="program-icon" class="icon icon-clock"></i>
+            </div>
+            <div id="block-info" class="right">
+                <p class="title"></p>
+                <p class="date-string"></p>
+                <!-- <div class="icon-program"></div> -->
+                <div>
+                    <p class="start-time"></p>
+                    <p class="end-time"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="widget">
+            <h3>Manual</h3>
+            <div class="left">
+                <i id="adjust-temp-icon" class="icon icon-thermometer-minus icon-thermometer"></i>
+            </div>
+            <div id="adjust-temp-container" class="right min-temperature">
+                <div class="control-set-temperature set">
+                    <span class="temperature">5.0</span>
+                    <div class="button button-higher"><i class="icon icon-plus"></i></div>
+                    <div class="button button-lower"><i class="icon icon-minus"></i></div>
+                </div>
+                <div class="measured">Room temperature<span class="temperature">10.0</span></div>
+            </div>
+        </div>
+
+        <div class="widget">
+            <h3>Program</h3>
+            <div class="left">
+                <i class="icon icon-pause"></i>
+            </div>
+            <div id="pause-widget" class="right">
+                <div class="switch button-pause inactive">
+                    <div class="slider">||</div>
+                    <span class="off">On</span>
+                    <span class="on">Off</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="outside-temperature" class="widget">
+            <h3>Weather</h3>
+            <div class="left">
+                <img src="static/images/weather/wsymbol_0033_cloudy_with_light_rain_night.png">
+            </div>
+            <div class="right">
+                <p class="location"></p>
+                <p class="temperature">8.0</p>
+            </div>
+        </div>
+
+    </div>
+</div>

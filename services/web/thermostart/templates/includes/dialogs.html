@@ -1,0 +1,194 @@
+<div id="dialog-edit-program" class="dialog">
+    <div class="dialog-background"></div>
+    <div class="dialog-window">
+        <h4 class="program-name">Program '<span></span>'</h4>
+        <div class="widget">
+            <div class="left">
+                <span>Temperature</span>
+            </div>
+            <div class="set-temperature right">
+                <div class="control-set-temperature">
+                    <span class="temperature"></span>
+                    <div class="button button-higher"><i class="icon icon-plus"></i></div>
+                    <div class="button button-lower"><i class="icon icon-minus"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="set-dhw widget">
+            <div class="left">
+                <span>DHW</span>
+                <a href="http://support.thermosmart.nl/support/solutions/articles/6000061684-tapwater" target="_blank">what is this?</a>
+            </div>
+            <div class="right">
+                <div>
+                    <div class="radio-button">
+                        <div class="iradio_minimal-grey" style="position: relative;"><input type="radio" name="dhw-mode" class="dhw-mode-enabled"></div><label>Saving energy</label>
+                    </div>
+                    <div class="radio-button">
+                        <div class="iradio_minimal-grey" style="position: relative;"><input type="radio" name="dhw-mode" class="dhw-mode-disabled"></div><label>Mantaining temperature</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget buttons">
+            <div class="dialog-buttons">
+                <button class="ok">Confirm</button>
+                <button class="cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dialog-edit-standard-week" class="dialog dialog-edit">
+    <div class="dialog-background"></div>
+    <div class="dialog-window">
+        <h4>Adjust Program Block</h4>
+        <div class="widget">
+            <div class="left">
+                <span>Program</span>
+            </div>
+            <div class="select-predef right"><select></select></div>
+        </div>
+        <div class="widget buttons">
+            <div class="dialog-buttons">
+                <button class="ok">Confirm</button>
+                <button class="cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dialog-edit-exceptions" class="dialog dialog-edit">
+    <div class="dialog-background"></div>
+    <div class="dialog-window">
+        <h4>Adjust Program Block</h4>
+        <div class="widget">
+            <div class="left">
+                <span>Description</span>
+            </div>
+            <div class="input-description right">
+                <input type="text">
+            </div>
+        </div>
+        <div class="widget">
+            <div class="left">
+                <span>Program</span>
+            </div>
+            <div class="select-predef right"><select></select></div>
+        </div>
+        <div class="widget buttons">
+            <div class="dialog-buttons">
+                <button class="ok">Confirm</button>
+                <button class="cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dialog-app-revoke" class="dialog dialog-edit">
+    <div class="dialog-background"></div>
+    <div class="dialog-window">
+        <h4>Remove app?</h4>
+        <div class="widget">
+            <p>
+                Are you sure you want to remove this app?
+                <br>
+                Follow the instructions of the app developer to restore the connection.
+                <br>
+                NOTE: If you revoke an access to the application, potential related obligations will still apply. For example, if there is a subscription associated with the app, you have to cancel it with the developer of the app.
+            </p>
+            <br>
+            <br>
+            <div class="widget">
+                <div class="left">
+                    <span>App</span>
+                </div>
+                <div class="right app-info app-name">
+                </div>
+            </div>
+            <div class="widget">
+                <div class="left">
+                    <span>Developer</span>
+                </div>
+                <div class="right app-info app-author">
+                </div>
+            </div>
+            <div class="widget">
+                <div class="left">
+                    <span>Developer's email</span>
+                </div>
+                <div class="right app-info app-author-email">
+                </div>
+            </div>
+        </div>
+        <div class="widget buttons">
+            <div class="dialog-buttons">
+                <button class="ok">Confirm</button>
+                <button class="cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dialog-device-remove" class="dialog dialog-edit">
+    <div class="dialog-background"></div>
+    <div class="dialog-window">
+        <h4>Remove device?</h4>
+        <div class="widget">
+            <p>
+                Are you sure you want to remove this device?
+            </p>
+            <small>
+                Removing this device may result in your Thermosmart being paused automatically as soon as we retrieve a status update from another device.
+            </small>
+            <br>
+            <br>
+            <div class="widget">
+                <div class="left"><span>Modelname</span></div>
+                <div class="right device-info model-name"></div>
+            </div>
+            <div class="widget">
+                <div class="left"><span>Hardware ID</span></div>
+                <div class="right device-info hw-id"></div>
+            </div>
+            <div class="widget">
+                <div class="left"><span>In zone</span></div>
+                <div class="right device-info in-zone"></div>
+            </div>
+            <div class="widget">
+                <div class="left"><span>Last update</span></div>
+                <div class="right device-info updated-at"></div>
+            </div>
+            <div class="widget">
+                <div class="left"><span>Added on</span></div>
+                <div class="right device-info created-at"></div>
+            </div>
+        </div>
+        <div class="widget buttons">
+            <div class="dialog-buttons">
+                <button class="ok">Confirm</button>
+                <button class="cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dialog-remove-profile" class="dialog dialog-edit">
+    <div class="dialog-background"></div>
+    <div class="dialog-window">
+        <h4>Remove my account</h4>
+        <div class="widget">
+            <p>
+                WARNING: Your email address, password, calendar and other personal data will be deleted. To use ThermoSmart again you must register it again with the Hardware ID and password.
+            </p>
+            <br>
+            <br>
+            <div class="widget buttons">
+                <div class="dialog-buttons">
+                    <button class="ok">Confirm</button>
+                    <button class="cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

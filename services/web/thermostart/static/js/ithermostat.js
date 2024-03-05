@@ -104,15 +104,6 @@ $(function() {
         var firmwareToggle = new ts.FirmwareToggle({ el: $('#firmware-container'), model: thermostat });
     }
 
-    if ($('.auto-pause-devices').length) {
-        var autoPauseDevices = new ts.AutoPauseDevices({ el: $('.auto-pause-devices'), model: thermostat });
-    }
-    
-    if ($('.auto-pause-toggle').length) {
-        var autoPauseToggle = new ts.AutoPauseToggle({ el: $('.auto-pause-toggle'), model: thermostat });
-    }
-
-
     if ($('.factory-reset').length) {
         
         $('.factory-reset .btn-reset-standard-week').on('click', function() {

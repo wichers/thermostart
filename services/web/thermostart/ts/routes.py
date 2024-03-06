@@ -258,7 +258,6 @@ def api():
             # communicate new state to ui
             emit('source', {'source': tssrc}, namespace='/', to = hardware_id)
 
-
     updatetime = False
     if 'ts' in tsreq:
         now = datetime.utcnow()
@@ -272,9 +271,9 @@ def api():
         # Time (GMT) in seconds
         xml = xml + f'<TS>{calendar.timegm(time.gmtime())}</TS>'
 
-        # time zone offset in minutes (signed).
-        tz = device.utc_offset_in_seconds() / 60
-        xml = xml + f'<TZ>{tz}</TZ>'
+    # time zone offset in minutes (signed).
+    tz = device.utc_offset_in_seconds() / 60
+    xml = xml + f'<TZ>{tz}</TZ>'
 
     xml = xml + '</ITHERMOSTAT>'
 

@@ -26,7 +26,7 @@ TS_MASTER_KEY = 'MR1FGUGSq0YLnZpI2kjABw=='
 FIRMWARE_VERSIONS = [
    {'hw': 1, 'filename': 'TS_HW1_20141018.hex', 'version': 20141019},
    {'hw': 3, 'filename': 'TS_HW3_30030030.hex', 'version': 30030030},
-   {'hw': 4, 'filename': 'TS_HW4_30040030.hex', 'version': 30040030},
+   {'hw': 4, 'filename': 'TS_HW4_30040043.hex', 'version': 30040043},
    {'hw': 5, 'filename': 'TS_HW5_30050046.hex', 'version': 30050046}
 ]
 
@@ -64,14 +64,14 @@ def patchfirmware(h:IntelHex, hw, host, port):
       version = 30030030 + 100
 
     elif hw == 4:
-      addr_lo = 0x1D5B8 * 2
-      addr_hi = 0x1D5BA * 2
+      addr_lo = 0x1D7CC * 2
+      addr_hi = 0x1D7CE * 2
 
-      assert(h.gets(addr_lo, 4) == b'\xe0\xfd\x25\x00')    # MOV      #0x5FDE, W0
+      assert(h.gets(addr_lo, 4) == b'\xb0\xfe\x25\x00')    # MOV      #0x5FEB, W0
       assert(h.gets(addr_hi, 4) == b'\xa1\x1c\x20\x00')    # MOV      #0x1CA, W1
   
       # we use the 3rd character for our patched firmware
-      version = 30040030 + 100
+      version = 30040043 + 100
 
     elif hw == 5:
       addr_lo = 0x106E8 * 2
@@ -123,7 +123,7 @@ def patchfirmware(h:IntelHex, hw, host, port):
       host = b'\0'.join(host)[1:]
       h.puts(addr, host)
 
-    # Patch #3: disable 'hw.yourowl.com' host
+    # Patch #3: disable 'hw.yourowl.com' or 'my.yourowl.com' host
     if hw == 5:
       seq = b'\x68\x00\x00\x77\x2e\x00\x00\x79\x6f\x00\x00\x75\x72\x00\x00\x6f\x77\x00\x00\x6c\x2e\x00\x00\x63\x6f\x00\x00\x6d'
       addr = h.find(seq)
@@ -131,6 +131,11 @@ def patchfirmware(h:IntelHex, hw, host, port):
     else:
       seq = b'\x68\x77\x00\x2e\x79\x6f\x00\x75\x72\x6f\x00\x77\x6c\x2e\x00\x63\x6f\x6d'
       addr = h.find(seq)
+
+      if addr <= 0:
+        seq = b'\x6d\x79\x00\x2e\x79\x6f\x00\x75\x72\x6f\x00\x77\x6c\x2e\x00\x63\x6f\x6d'
+        addr = h.find(seq)
+
       assert(addr > 0)
     h.puts(addr, b''.ljust(len(seq), b'\0'))
 
@@ -141,7 +146,7 @@ def patchfirmware(h:IntelHex, hw, host, port):
     elif hw == 3:
       offsets = [0xA0D4 * 2, 0xA11C * 2, 0xAA06 * 2, 0xAA1A * 2]
     elif hw == 4:
-      offsets = [0xAA06 * 2, 0xAA1A * 2, 0xA0D4 * 2, 0xA11C * 2]
+      offsets = [0xAAA2 * 2, 0xAAB6 * 2, 0xA13C * 2, 0xA184 * 2]
     elif hw == 5:
       offsets = [0xA6D8 * 2, 0xA708 * 2, 0xAE62 * 2, 0xAE8E * 2]
 
@@ -155,6 +160,8 @@ def patchfirmware(h:IntelHex, hw, host, port):
       mnemonic = mnemonic.to_bytes(4, 'little')
       h.puts(addr, mnemonic)
 
+IVT_START = 0
+IVT_END = 0x400
 BOOTLOADER_END = 0x2800
 BLOCKSIZE = 256
 
@@ -169,6 +176,18 @@ def ts_fw_checksum(data):
 
     return (256 - reg) & 0xff
 
+def get_blocks(h: IntelHex, start, end):
+    r = ''
+    for addr in range(start, end, BLOCKSIZE):
+        data = h.tobinarray(addr, size = BLOCKSIZE)
+        header = ':{:04X}0000'.format(int(addr / BLOCKSIZE))
+        line = '{}{:02X}{}{:02X}\r\n'.format(header, 
+                                         ts_fw_checksum(header), 
+                                         hexlify(bytearray(data)).upper().decode(), 
+                                         ts_fw_checksum(data))
+        r = r + line
+    return r
+
 def hex2patchedts(fin, hw, host, port):
     try:
         h = IntelHex(fin)
@@ -181,20 +200,17 @@ def hex2patchedts(fin, hw, host, port):
     
     # write header containing amount of blocks
     header = ':THW00{:02X}0000{:04X}'.format(hw, 
-                                             int((h.maxaddr() + 1 - BOOTLOADER_END) / BLOCKSIZE))
+                                             int((IVT_END / BLOCKSIZE) + (h.maxaddr() + 1 - BOOTLOADER_END) / BLOCKSIZE))
     header = '{}{:02X}\r\n'.format(header, ts_fw_checksum(header))
     r = ''
-    r = r + header
+    r += header
 
-    # write blocks
-    for addr in range(BOOTLOADER_END, h.maxaddr(), BLOCKSIZE):
-        data = h.tobinarray(addr, size = BLOCKSIZE)
-        header = ':{:04X}0000'.format(int(addr / BLOCKSIZE))
-        line = '{}{:02X}{}{:02X}\r\n'.format(header, 
-                                         ts_fw_checksum(header), 
-                                         hexlify(bytearray(data)).upper().decode(), 
-                                         ts_fw_checksum(data))
-        r = r + line
+    # write IVT
+    r += get_blocks(h, IVT_START, IVT_END)
+
+    # skip bootloader and write rest of firmware
+    r += get_blocks(h, BOOTLOADER_END, h.maxaddr())
+
     return r
 
 def get_patched_firmware_by_hw_version(version, host, port):
@@ -203,7 +219,7 @@ def get_patched_firmware_by_hw_version(version, host, port):
     elif version == 3:
         filename = 'firmware/TS_HW3_30030030.hex'
     elif version == 4:
-        filename = 'firmware/TS_HW4_30040030.hex'
+        filename = 'firmware/TS_HW4_30040043.hex'
     elif version == 5:
         filename = 'firmware/TS_HW5_30050046.hex'
     else:

@@ -1,5 +1,6 @@
 from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
+
 from thermostart import db
 from thermostart.auth.forms import LoginForm, RegistrationForm, UpdateAccountForm
 from thermostart.models import Device, Location

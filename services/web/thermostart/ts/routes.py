@@ -7,6 +7,7 @@ from urllib.parse import parse_qs
 import requests
 from flask import Blueprint, Response, request
 from flask_socketio import emit
+
 from thermostart import db
 from thermostart.models import Device, Location
 

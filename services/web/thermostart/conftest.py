@@ -1,4 +1,5 @@
 import pytest
+
 from thermostart import create_app
 
 

@@ -1,6 +1,5 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from thermostart.models import Device, Location
 from wtforms import Label, PasswordField, StringField, SubmitField
 from wtforms.validators import (
     DataRequired,
@@ -10,6 +9,8 @@ from wtforms.validators import (
     ValidationError,
 )
 from wtforms_sqlalchemy.fields import QuerySelectField
+
+from thermostart.models import Device, Location
 
 
 def location_countries():

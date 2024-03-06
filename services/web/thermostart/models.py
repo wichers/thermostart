@@ -6,6 +6,7 @@ from flask_login import UserMixin
 from sqlalchemy import JSON, DateTime
 from sqlalchemy.ext.mutable import MutableDict, MutableList
 from sqlalchemy.sql import func
+
 from thermostart import db, login_manager
 from thermostart.ts.utils import Display, Source, StatusLed
 

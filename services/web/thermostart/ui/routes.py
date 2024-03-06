@@ -1,7 +1,6 @@
-import time
-
 from flask import Blueprint, jsonify, make_response, render_template, request
 from flask_login import current_user, login_required
+
 from thermostart import db
 from thermostart.models import Device, Location
 from thermostart.ts.utils import get_patched_firmware_by_hw_version

@@ -1,4 +1,5 @@
 from flask.cli import FlaskGroup
+
 from thermostart import create_app, db, fill_db
 
 app = create_app()

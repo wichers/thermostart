@@ -1,22 +1,23 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for, jsonify
+from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
-
 from thermostart import db
-from thermostart.models import Device, Location
 from thermostart.auth.forms import LoginForm, RegistrationForm, UpdateAccountForm
+from thermostart.models import Device, Location
 
 auth = Blueprint("auth", __name__)
+
 
 @auth.route("/register", methods=["GET", "POST"])
 def register_page():
     if current_user.is_authenticated:
         return redirect(url_for("main.homepage"))
     form = RegistrationForm()
-    if request.method == 'POST':
-        form.city.query = Location.query.with_entities(
-                    Location.id, 
-                    Location.city
-                ).filter_by(id=request.form['city']).order_by(Location.city)
+    if request.method == "POST":
+        form.city.query = (
+            Location.query.with_entities(Location.id, Location.city)
+            .filter_by(id=request.form["city"])
+            .order_by(Location.city)
+        )
     if form.validate_on_submit():
         device = Device(hardware_id=form.hardware_id.data, password=form.password.data)
         device.location_id = form.city.data.id
@@ -50,30 +51,33 @@ def login_page():
 def logout():
     logout_user()
     flash("You have been logged out successfully.", "success")
-    return redirect('/login')
+    return redirect("/login")
 
 
 @auth.route("/account", methods=["GET", "POST"])
 @login_required
 def account_page():
     form = UpdateAccountForm(hardware_id=current_user)
-    if request.method == 'POST':
-        location_id = request.form['city']
+    if request.method == "POST":
+        location_id = request.form["city"]
     else:
         location_id = current_user.location_id
 
-    (country, city) = Location.query.with_entities(
-                Location.country,
-                Location.city
-            ).filter_by(id=location_id).order_by(Location.city).one()
-    form.country.data = (country, )
+    (country, city) = (
+        Location.query.with_entities(Location.country, Location.city)
+        .filter_by(id=location_id)
+        .order_by(Location.city)
+        .one()
+    )
+    form.country.data = (country,)
 
-    form.city.query = Location.query.with_entities(
-                Location.id, 
-                Location.city
-            ).filter_by(country=country).order_by(Location.city)
+    form.city.query = (
+        Location.query.with_entities(Location.id, Location.city)
+        .filter_by(country=country)
+        .order_by(Location.city)
+    )
 
-    if request.method == 'GET':
+    if request.method == "GET":
         form.city.data = (location_id, city)
 
     if form.validate_on_submit():
@@ -86,11 +90,13 @@ def account_page():
         form.hardware_id.data = current_user.hardware_id
     return render_template("account.html", title="Account", form=form)
 
+
 @auth.route("/account-cities", methods=["POST"])
 def cities():
-    q = Location.query.with_entities(
-            Location.id, 
-            Location.city
-        ).filter_by(country=request.form['country']).order_by(Location.city)
-    result_dict = [u._asdict()  for u in q.all()]
+    q = (
+        Location.query.with_entities(Location.id, Location.city)
+        .filter_by(country=request.form["country"])
+        .order_by(Location.city)
+    )
+    result_dict = [u._asdict() for u in q.all()]
     return jsonify(result_dict)

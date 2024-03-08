@@ -5,7 +5,7 @@ services:
     build:
       context: ./services/web
       dockerfile: Dockerfile.prod
-    command: gunicorn --bind 0.0.0.0:3888 manage:app
+    command: gunicorn --timeout=5 --worker-class=gevent --bind 0.0.0.0:3888 manage:app
     volumes:
       - static_volume:/home/app/web/thermostart/static
       - media_volume:/home/app/web/thermostart/media

@@ -30,6 +30,7 @@ TS_MASTER_KEY = "MR1FGUGSq0YLnZpI2kjABw=="
 
 FIRMWARE_VERSIONS = [
     {"hw": 1, "filename": "TS_HW1_20141018.hex", "version": 20141019},
+    {"hw": 2, "filename": "TS_HW2_30020018.hex", "version": 30020018},
     {"hw": 3, "filename": "TS_HW3_30030030.hex", "version": 30030030},
     {"hw": 4, "filename": "TS_HW4_30040043.hex", "version": 30040043},
     {"hw": 5, "filename": "TS_HW5_30050046.hex", "version": 30050046},
@@ -60,6 +61,16 @@ def patchfirmware(h: IntelHex, hw, host, port):
 
         # we use the 3rd character for our patched firmware
         version = 20141019 + 100
+
+    elif hw == 2:
+        addr_lo = 0x1CC9E * 2
+        addr_hi = 0x1CCA0 * 2
+
+        assert h.gets(addr_lo, 4) == b"\x20\x1b\x21\x00"  # MOV      #0x11B2, W0
+        assert h.gets(addr_hi, 4) == b"\xa1\x1c\x20\x00"  # MOV      #0x1CA, W1
+
+        # we use the 3rd character for our patched firmware
+        version = 30020018 + 100
 
     elif hw == 3:
         addr_lo = 0x1D728 * 2
@@ -153,6 +164,8 @@ def patchfirmware(h: IntelHex, hw, host, port):
     # offsets as displayed in IDA need to be multiplied by 2
     if hw == 1:
         offsets = [0xD77C * 2, 0xD7C4 * 2, 0xE1E0 * 2, 0xE1F4 * 2]
+    elif hw == 2:
+        offsets = [0x9FD0 * 2, 0xA018 * 2, 0xA8F8 * 2, 0xA90C * 2]
     elif hw == 3:
         offsets = [0xA0D4 * 2, 0xA11C * 2, 0xAA06 * 2, 0xAA1A * 2]
     elif hw == 4:
@@ -234,6 +247,8 @@ def hex2patchedts(fin, hw, host, port):
 def get_patched_firmware_by_hw_version(version, host, port):
     if version == 1:
         filename = "firmware/TS_HW1_20141018.hex"
+    elif version == 2:
+        filename = "firmware/TS_HW2_30020018.hex"
     elif version == 3:
         filename = "firmware/TS_HW3_30030030.hex"
     elif version == 4:

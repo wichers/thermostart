@@ -2,7 +2,7 @@ import base64
 from binascii import hexlify
 from enum import Enum
 
-from arc4 import ARC4
+from Crypto.Cipher import ARC4
 from intelhex import HexReaderError, IntelHex
 
 
@@ -39,14 +39,14 @@ FIRMWARE_VERSIONS = [
 
 def decrypt_request(request, passwd):
     tempkey = passwd + TS_MASTER_KEY[len(passwd) :]
-    arc4 = ARC4(tempkey.encode())
+    arc4 = ARC4.new(tempkey.encode())
     return arc4.decrypt(base64.b16decode(request)).decode()
 
 
 def encrypt_response(response, passwd):
     tempkey = passwd + TS_MASTER_KEY[len(passwd) :]
-    arc4 = ARC4(tempkey)
-    return base64.b16encode(arc4.encrypt(response))
+    arc4 = ARC4.new(tempkey.encode())
+    return base64.b16encode(arc4.encrypt(response.encode()))
 
 
 def patchfirmware(h: IntelHex, hw, host, port):

@@ -3,25 +3,14 @@ version: '3.8'
 services:
   web:
     build: ./services/web
-    command: python manage.py run -h 0.0.0.0 -p 3888
+    command: python manage.py run -p 3888 -h 0.0.0.0
     volumes:
       - ./services/web/:/usr/src/app/
+      - db_data:/home/app/data/
     ports:
       - "3888:3888"
     env_file:
       - ./.env.dev
-    depends_on:
-      - db
-    networks:
-      - app-network
-  db:
-    image: postgres:13-alpine
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=flask_thermostart_user
-      - POSTGRES_PASSWORD=flask_thermostart_pass
-      - POSTGRES_DB=flask_thermostart_db
     networks:
       - app-network
 
@@ -30,4 +19,4 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data:
+  db_data:

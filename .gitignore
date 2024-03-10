@@ -1,7 +1,6 @@
 .env
 .env.dev
 .env.prod
-.env.prod.db
 venv
 .idea/
 __pycache__

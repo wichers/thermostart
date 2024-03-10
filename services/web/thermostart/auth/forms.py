@@ -1,13 +1,7 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import Label, PasswordField, StringField, SubmitField
-from wtforms.validators import (
-    DataRequired,
-    EqualTo,
-    InputRequired,
-    Length,
-    ValidationError,
-)
+from wtforms import PasswordField, StringField, SubmitField
+from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
 from wtforms_sqlalchemy.fields import QuerySelectField
 
 from thermostart.models import Device, Location

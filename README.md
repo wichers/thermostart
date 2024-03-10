@@ -47,8 +47,8 @@ docker-compose exec web python manage.py create_db
 docker-compose build
 docker-compose build --no-cache
 docker-compose up -d      # d makes in run in the background
-docker-compose down       # remove existing containers       | CAREFUL IN PRODUCTION!
-docker-compose down -v    # include volume of postgres data  | CAREFUL IN PRODUCTION!
+docker-compose down       # remove existing container        | CAREFUL IN PRODUCTION!
+docker-compose down -v    # include volume of sqlite data    | CAREFUL IN PRODUCTION!
 
 # Docker check logs 
 docker-compose logs
@@ -56,23 +56,17 @@ docker-compose logs
 # Stop containers
 docker-compose stop
 docker stop thermostart-web-1
-docker stop thermostart-db-1
 
 # Start containers
 docker-compose start
 docker start thermostart-web-1
-docker start thermostart-db-1
 ```
 
 ## Production
 Basically it's the same way as dev server, but you need to use different files:
-- create .env.prod for environment variables:
+- create .env.prod for environment variables (without FLASK_DEBUG):
   - `APP_FOLDER=/home/app/web`
   - `DATABASE_URL= <URL with proper database data>`
-- create .env.prod.db for database environment variables:
-  - `POSTGRES_USER= <database user>`
-  - `POSTGRES_PASSWORD= <database password>`
-  - `POSTGRES_DB= <database name>`
 
 And most importantly, to every docker command add the "-f" flag: `-f docker-compose.prod.yml` 
 to point the file that want to use to build images and run. Example:

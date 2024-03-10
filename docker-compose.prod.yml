@@ -5,33 +5,19 @@ services:
     build:
       context: ./services/web
       dockerfile: Dockerfile.prod
-    command: gunicorn --timeout=5 --worker-class=gevent --bind 0.0.0.0:3888 manage:app
+    command: gunicorn -k eventlet -w 1 -b 0.0.0.0:3888 'thermostart:create_app()'
     volumes:
-      - static_volume:/home/app/web/thermostart/static
-      - media_volume:/home/app/web/thermostart/media
-    expose:
-      - 3888
+      - db_data_prod:/home/app/data/
+    ports:
+      - "3888:3888"
     env_file:
       - ./.env.prod
-    depends_on:
-      - db
-  db:
-    image: postgres:13-alpine
-    volumes:
-      - postgres_data_prod:/var/lib/postgresql/data/
-    env_file:
-      - ./.env.prod.db
-  nginx:
-    build: ./services/nginx
-    volumes:
-      - static_volume:/home/app/web/thermostart/static
-      - media_volume:/home/app/web/thermostart/media
-    ports:
-      - 1337:80
-    depends_on:
-      - web
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
-  postgres_data_prod:
-  static_volume:
-  media_volume:
+  db_data_prod:

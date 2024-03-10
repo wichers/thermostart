@@ -12,10 +12,6 @@ WORKDIR /usr/src/app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# install system dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc build-essential
-
 # lint
 RUN pip install --upgrade pip
 RUN pip install flake8
@@ -24,7 +20,7 @@ RUN pip install isort
 COPY . /usr/src/app/
 RUN flake8 --ignore=E203,E501,F401,W503 .
 RUN black --check .
-RUN isort --check-only --profile black .
+RUN isort --check-only --diff --profile black .
 
 # install python dependencies
 COPY ./requirements.txt .
@@ -47,11 +43,12 @@ RUN addgroup --system app && adduser --system --group app
 # create the appropriate directories
 ENV HOME=/home/app
 ENV APP_HOME=/home/app/web
+ENV DB_HOME=/home/app/data
 RUN mkdir $APP_HOME
+RUN mkdir $DB_HOME
 WORKDIR $APP_HOME
 
 # install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends netcat
 COPY --from=builder /usr/src/app/wheels /wheels
 COPY --from=builder /usr/src/app/requirements.txt .
 RUN pip install --upgrade pip
@@ -65,6 +62,7 @@ COPY . $APP_HOME
 
 # chown all the files to the app user
 RUN chown -R app:app $APP_HOME
+RUN chown -R app:app $DB_HOME
 
 # change to the app user
 USER app

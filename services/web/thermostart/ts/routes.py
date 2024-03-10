@@ -106,7 +106,7 @@ def api():
     xml = "<ITHERMOSTAT>"
 
     if device.cal_synced is False:
-        xml = xml + "<CAL>"
+        xml += "<CAL>"
 
         # tm_wday in thermostat starts at 0 being Sunday, webinterface says 0 is Monday
         tm_wday = [
@@ -160,9 +160,9 @@ def api():
             )
 
         cal_version = device.cal_version + 1
-        xml = xml + "v{:04X}".format(cal_version & 0xFFFF)
-        xml = xml + std_week + exc_week
-        xml = xml + "</CAL>"
+        xml += "v{:04X}".format(cal_version & 0xFFFF)
+        xml += std_week + exc_week
+        xml += "</CAL>"
 
         device.cal_version = cal_version
         device.cal_synced = True
@@ -182,7 +182,7 @@ def api():
     # do we need to update?
     # TODO: reverse engineer firmware web guided update process (firmware update process currently stalls at 13%)
     # if fw not in [20141019 + 100, 30030030 + 100, 30040030 + 101, 30050046 + 100]:
-    #     xml = xml + f'<FW>1</FW>'
+    #     xml += f'<FW>1</FW>'
 
     if int(tsreq["pv"][0]) != device.measured_temperature:
         device.measured_temperature = tsreq["pv"][0]
@@ -214,7 +214,7 @@ def api():
         outside_temperature = int(response["data"]["values"]["temperature"] * 10)
 
         print("setting outside temperature to:", outside_temperature)
-        xml = xml + f"<BVSET>{outside_temperature}</BVSET>"
+        xml += f"<BVSET>{outside_temperature}</BVSET>"
         emit(
             "outside_temperature",
             {
@@ -237,15 +237,15 @@ def api():
         print(tsreq)
 
         pause = int(device.source == Source.PAUSE.value)
-        xml = xml + f"<PAUSE>{pause}</PAUSE>"
-        xml = xml + f"<INIT><SRC>{device.source}</SRC></INIT>"
-        xml = xml + f"<SVSET>{device.set_temperature}</SVSET>"
-        xml = xml + f"<BVSET>{device.outside_temperature}</BVSET>"
-        xml = xml + f"<TA>{device.ta}</TA>"
-        xml = xml + f"<DIM>{device.dim}</DIM>"
-        xml = xml + f"<SLS>{device.sl}</SLS>"
-        xml = xml + f"<SD>{device.sd}</SD>"
-        xml = xml + f"<LOCALE>{device.locale}</LOCALE>"
+        xml += f"<PAUSE>{pause}</PAUSE>"
+        xml += f"<INIT><SRC>{device.source}</SRC></INIT>"
+        xml += f"<SVSET>{device.set_temperature}</SVSET>"
+        xml += f"<BVSET>{device.outside_temperature}</BVSET>"
+        xml += f"<TA>{device.ta}</TA>"
+        xml += f"<DIM>{device.dim}</DIM>"
+        xml += f"<SLS>{device.sl}</SLS>"
+        xml += f"<SD>{device.sd}</SD>"
+        xml += f"<LOCALE>{device.locale}</LOCALE>"
 
     # is there a change from the webinterface?
     elif device.ui_synced is False:
@@ -253,25 +253,25 @@ def api():
         # somebody pressed pause?
         if device.ui_source == "pause_button":
             pause = int(device.source == Source.PAUSE.value)
-            xml = xml + f"<PAUSE>{pause}</PAUSE>"
-            xml = xml + f"<INIT><SRC>{device.source}</SRC></INIT>"
+            xml += f"<PAUSE>{pause}</PAUSE>"
+            xml += f"<INIT><SRC>{device.source}</SRC></INIT>"
         elif device.ui_source == "temperature_calibration":
-            xml = xml + f"<TA>{device.ta}</TA>"
+            xml += f"<TA>{device.ta}</TA>"
         elif device.ui_source == "dim_toggle":
-            xml = xml + f"<DIM>{device.dim}</DIM>"
+            xml += f"<DIM>{device.dim}</DIM>"
         elif device.ui_source == "locale_toggle":
-            xml = xml + f"<INIT><LOCALE>{device.locale}</LOCALE></INIT>"
+            xml += f"<INIT><LOCALE>{device.locale}</LOCALE></INIT>"
         elif device.ui_source == "statusled_toggle":
-            xml = xml + f"<SLS>{device.sl}</SLS>"
+            xml += f"<SLS>{device.sl}</SLS>"
         elif device.ui_source == "display_mode_toggle":
-            xml = xml + f"<SD>{device.sd}</SD>"
+            xml += f"<SD>{device.sd}</SD>"
         elif (
             device.ui_source == "direct_temperature_setter_up"
             or device.ui_source == "direct_temperature_setter_down"
         ):
-            xml = xml + "<PAUSE>0</PAUSE>"
-            xml = xml + f"<INIT><SRC>{device.source}</SRC></INIT>"
-            xml = xml + f"<SVSET>{device.set_temperature}</SVSET>"
+            xml += "<PAUSE>0</PAUSE>"
+            xml += f"<INIT><SRC>{device.source}</SRC></INIT>"
+            xml += f"<SVSET>{device.set_temperature}</SVSET>"
 
         # we have synced to the device
         device.ui_synced = True
@@ -306,8 +306,8 @@ def api():
             device.source = Source.STD_WEEK.value
             db.session.commit()
 
-            xml = xml + "<PAUSE>0</PAUSE>"
-            xml = xml + f"<INIT><SRC>{Source.STD_WEEK.value}</SRC></INIT>"
+            xml += "<PAUSE>0</PAUSE>"
+            xml += f"<INIT><SRC>{Source.STD_WEEK.value}</SRC></INIT>"
 
             emit(
                 "source",
@@ -334,13 +334,13 @@ def api():
 
     if updatetime:
         # Time (GMT) in seconds
-        xml = xml + f"<TS>{calendar.timegm(time.gmtime())}</TS>"
+        xml += f"<TS>{calendar.timegm(time.gmtime())}</TS>"
 
     # time zone offset in minutes (signed).
     tz = device.utc_offset_in_seconds() / 60
-    xml = xml + f"<TZ>{tz}</TZ>"
+    xml += f"<TZ>{tz}</TZ>"
 
-    xml = xml + "</ITHERMOSTAT>"
+    xml += "</ITHERMOSTAT>"
 
     data = encrypt_response(xml, device.password)
     return Response(response=data, status=200, mimetype="application/octet-stream")

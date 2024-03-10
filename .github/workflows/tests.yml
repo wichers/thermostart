@@ -10,16 +10,6 @@ jobs:
       matrix:
         python-version: [3.12.2]
 
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_DB: github_actions
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -36,10 +26,7 @@ jobs:
           SECRET_KEY: 9971fcdasf79agwiog4ba406bcaa2353234ds3tgd
           DEBUG: False
           ALLOWED_HOSTS: "127.0.0.1"
-          POSTGRES_DB: github_actions
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/github_actions
+          DATABASE_URL: sqlite:////home/app/data/flask_thermostart.db
           FLASK_APP: thermostart
         run: |
           python services/web/manage.py create_db

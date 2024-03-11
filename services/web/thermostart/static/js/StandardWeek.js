@@ -154,7 +154,7 @@ ts.initializeStandardWeek = function(thermostat, $scheduleContainer, $stencilCon
             getBlockBefore: ts.StandardWeekCollection.prototype.getBlockBefore,
             blockMinSize: ts.STANDARD_WEEK_RESOLUTION
         })),
-        columnWidth: (opts.width || 650) / 7,
+        columnWidth: (opts.width || 600) / 7,
         rows: ts.STANDARD_WEEK_ROWS,
         rowHeight: (opts.height || 550) / ts.STANDARD_WEEK_ROWS,
         blockSmallSize: ts.STANDARD_WEEK_RESOLUTION,

@@ -12,6 +12,7 @@
 .navigation-settings #settings-container,
 .navigation-standard-week #standard-week-container {
     display: block;
+    width: 900px;
 }
 
 .navigation-account #navigation-links a[href="/account"],

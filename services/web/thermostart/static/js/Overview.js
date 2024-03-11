@@ -259,11 +259,11 @@ ts.initializeOverview = function(thermostat, $scheduleContainer, opts) {
         var now = thermostat.getCurrentMoment();
         var gridCoordinates = { x: now.isoWeekday() - 1, y: now.hours() * ts.OVERVIEW_RESOLUTION };
 
-        $dayIndicator.css('top', 20 + gridCoordinates.y * scheduleView.options.rowHeight);
+        $dayIndicator.css('top', gridCoordinates.y * scheduleView.options.rowHeight);
 
         $timeIndicator.css({
             left: gridCoordinates.x * scheduleView.options.columnWidth - 1,
-            top: 20 + gridCoordinates.y * scheduleView.options.rowHeight
+            top: gridCoordinates.y * scheduleView.options.rowHeight
         }).text(now.format('HH:mm'));
 
         // Gray out past blocks.

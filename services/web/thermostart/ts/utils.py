@@ -244,6 +244,34 @@ def hex2patchedts(fin, hw, host, port):
     return r
 
 
+# EJE Electronics hex format, version 79
+def hex2patched_eje(fin, hw, host, port):
+    try:
+        h = IntelHex(fin)
+    except HexReaderError:
+        return 1
+
+    assert (h.maxaddr() + 1) % BLOCKSIZE == 0
+
+    patchfirmware(h, hw, host, port)
+
+    # write header containing amount of blocks
+    header = ":EJE{:04d}{:04X}".format(
+        79, int((IVT_END / BLOCKSIZE) + (h.maxaddr() + 1 - BOOTLOADER_END) / BLOCKSIZE)
+    )
+    header = "{}{:02X}\r\n".format(header, ts_fw_checksum(header))
+    r = ""
+    r += header
+
+    # write IVT
+    r += get_blocks(h, IVT_START, IVT_END)
+
+    # skip bootloader and write rest of firmware
+    r += get_blocks(h, BOOTLOADER_END, h.maxaddr())
+
+    return r
+
+
 def get_patched_firmware_by_hw_version(version, host, port):
     if version == 1:
         filename = "firmware/TS_HW1_20141018.hex"
@@ -257,4 +285,8 @@ def get_patched_firmware_by_hw_version(version, host, port):
         filename = "firmware/TS_HW5_30050046.hex"
     else:
         raise Exception("no compatible firmware available")
-    return hex2patchedts(filename, version, host, port)
+
+    if version == 1:
+        return hex2patched_eje(filename, version, host, port)
+    else:
+        return hex2patchedts(filename, version, host, port)

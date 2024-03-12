@@ -184,6 +184,12 @@
     opacity: 1; 
 }
 
+#overview-container .overview-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
 #current-week-container .indicator {
    position: absolute;
    top: 0px;
@@ -223,7 +229,8 @@
 }
 
 #overview-container .widget {
-    padding: 10px 10px 20px 10px;
+    /*padding: 10px 10px 20px 10px;*/
+    position: relative;
 }
 
 #current-week-container .line {
@@ -340,6 +347,10 @@
     height: 20px;
 }
 
+#adjust-temp-container {
+   margin-top: 10px;
+}
+
 /* adjust temperature widget */
 #adjust-temp-container.min-temperature .button-lower,
 #adjust-temp-container.max-temperature .button-higher {
@@ -348,7 +359,7 @@
 
 #adjust-temp-container .measured {
     line-height: 20px;
-    margin-top: 5px;
+    margin-top: 10px;
     font-size: larger;
 }
 

@@ -21,6 +21,7 @@
 
 .program-container > h2:first-child {
     padding-left: 10px;
+    padding-top: 10px;
 }
 
 .program-container > h2:nth-of-type(2) {
@@ -36,6 +37,9 @@
    width: 150px;
 }
 
+.standard-week-container .standard-week-programs {
+   margin: 10px;
+}
 .standard-week-container {
    padding-left: 20px;
 }

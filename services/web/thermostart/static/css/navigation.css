@@ -13,6 +13,8 @@
 .navigation-standard-week #standard-week-container {
     display: block;
     width: 900px;
+    position: relative;
+    top: 15px;
 }
 
 .navigation-account #navigation-links a[href="/account"],

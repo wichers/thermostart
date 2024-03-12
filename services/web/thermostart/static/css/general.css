@@ -52,9 +52,9 @@ h2 {
   font-weight: 600;
   font-size: 16px;
   padding-bottom: 10px;
-  padding-left: 20px;
+  padding-left: 10px;
   border-bottom: 1px dashed #dedede;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 h3 {
@@ -209,9 +209,12 @@ small {
    -o-user-select: none;
    user-select: none;
    background-color: #ffffff;
-  -moz-border-radius: 4px;
+   -moz-border-radius: 4px;
    -webkit-border-radius: 4px;
-    border-radius: 4px;
+   border-radius: 4px;
+   position: absolute;
+   top: 0px;
+
 }
 
 .window-container {
@@ -721,7 +724,8 @@ button:hover, input[type="submit"]:hover {
 }
 #temperature-now-container {
    position: absolute;
-   left: 10px;
+   /*top: 15px;*/
+   /*left: 10px;*/
    width: 200px;
    height: 650px;
    -moz-box-sizing: border-box;
@@ -737,8 +741,9 @@ button:hover, input[type="submit"]:hover {
    border-radius: 4px;
 }
 #current-week-container {
-    left: 220px;
+    left: 210px;
     position: absolute;
     margin-bottom: 20px;
     width: 690px;
+    top: 0px;
 }

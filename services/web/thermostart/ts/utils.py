@@ -35,6 +35,11 @@ FIRMWARE_VERSIONS = [
     {"hw": 4, "filename": "TS_HW4_30040043.hex", "version": 30040043},
     {"hw": 5, "filename": "TS_HW5_30050046.hex", "version": 30050046},
 ]
+UPGRADED_VERSION_MINOR = 200
+
+
+def upgraded_needed(hw, fw):
+    return next(item for item in FIRMWARE_VERSIONS if item["version"] + UPGRADED_VERSION_MINOR != fw and item["hw"] == hw)
 
 
 def decrypt_request(request, passwd):
@@ -43,10 +48,14 @@ def decrypt_request(request, passwd):
     return arc4.decrypt(base64.b16decode(request)).decode()
 
 
-def encrypt_response(response, passwd):
+def encrypt_response(response, passwd, hexencoded=True):
     tempkey = passwd + TS_MASTER_KEY[len(passwd) :]
     arc4 = ARC4.new(tempkey.encode())
-    return base64.b16encode(arc4.encrypt(response.encode()))
+    response = arc4.encrypt(response.encode())
+    if hexencoded is True:
+        return base64.b16encode(response)
+    else:
+        return response
 
 
 def patchfirmware(h: IntelHex, hw, host, port):
@@ -60,7 +69,7 @@ def patchfirmware(h: IntelHex, hw, host, port):
         assert h.gets(addr_hi, 4) == b"\x31\x13\x20\x00"  # MOV      #0x133, W1
 
         # we use the 3rd character for our patched firmware
-        version = 20141019 + 100
+        version = 20141019 + UPGRADED_VERSION_MINOR
 
     elif hw == 2:
         addr_lo = 0x1CC9E * 2
@@ -70,7 +79,7 @@ def patchfirmware(h: IntelHex, hw, host, port):
         assert h.gets(addr_hi, 4) == b"\xa1\x1c\x20\x00"  # MOV      #0x1CA, W1
 
         # we use the 3rd character for our patched firmware
-        version = 30020018 + 100
+        version = 30020018 + UPGRADED_VERSION_MINOR
 
     elif hw == 3:
         addr_lo = 0x1D728 * 2
@@ -80,7 +89,7 @@ def patchfirmware(h: IntelHex, hw, host, port):
         assert h.gets(addr_hi, 4) == b"\xa1\x1c\x20\x00"  # MOV      #0x1CA, W1
 
         # we use the 3rd character for our patched firmware
-        version = 30030030 + 100
+        version = 30030030 + UPGRADED_VERSION_MINOR
 
     elif hw == 4:
         addr_lo = 0x1D7CC * 2
@@ -90,7 +99,7 @@ def patchfirmware(h: IntelHex, hw, host, port):
         assert h.gets(addr_hi, 4) == b"\xa1\x1c\x20\x00"  # MOV      #0x1CA, W1
 
         # we use the 3rd character for our patched firmware
-        version = 30040043 + 100
+        version = 30040043 + UPGRADED_VERSION_MINOR
 
     elif hw == 5:
         addr_lo = 0x106E8 * 2
@@ -100,7 +109,7 @@ def patchfirmware(h: IntelHex, hw, host, port):
         assert h.gets(addr_hi, 4) == b"\xa1\x1c\x20\x00"  # MOV      #0x1CA, W1
 
         # we use the 3rd character for our patched firmware
-        version = 30050046 + 100
+        version = 30050046 + UPGRADED_VERSION_MINOR
 
     version_lo = version & 0xFFFF
     version_hi = version >> 16

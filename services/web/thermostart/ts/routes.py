@@ -16,6 +16,7 @@ from .utils import (
     decrypt_request,
     encrypt_response,
     get_patched_firmware_by_hw_version,
+    upgraded_needed,
 )
 
 ts = Blueprint("ts", __name__)
@@ -26,6 +27,7 @@ TOMORROW_APIKEY = "gFUNhMZ2o4VotYhmcLrul3WYy7I2X9rN"
 
 # WARNING: not to be used, needs reversing, web firmware is not working
 @ts.route("/fw")
+@ts.route("/fw/hcu")
 def firmware_update():
     arg = str(next(iter(request.args)))
     arg = arg.split("_")
@@ -44,7 +46,16 @@ def firmware_update():
 
     hw = int(tsreq["hw"][0])
 
+    print('request to upgrade', hw, tsreq)
+
     data = get_patched_firmware_by_hw_version(hw, device.host, device.port)
+    if hw < 5:
+        CHUNK_SIZE = 1023
+        data = encrypt_response(data, device.password)
+        data_chunks = [data[i:i + CHUNK_SIZE] for i in range(0, len(data), CHUNK_SIZE)]
+        data = b'\x00'.join(data_chunks)
+    elif hw == 5:
+        data = encrypt_response(data, device.password, False)
 
     return Response(response=data, status=200, mimetype="application/octet-stream")
 
@@ -181,8 +192,8 @@ def api():
 
     # do we need to update?
     # TODO: reverse engineer firmware web guided update process (firmware update process currently stalls at 13%)
-    # if fw not in [20141019 + 100, 30030030 + 100, 30040030 + 101, 30050046 + 100]:
-    #     xml += f'<FW>1</FW>'
+    # if upgraded_needed(hw, fw):
+    #     xml += '<FW>1</FW>'
 
     if int(tsreq["pv"][0]) != device.measured_temperature:
         device.measured_temperature = tsreq["pv"][0]

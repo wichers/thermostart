@@ -747,3 +747,8 @@ button:hover, input[type="submit"]:hover {
     width: 690px;
     top: 0px;
 }
+.account-container {
+    width: 900px;
+    position: relative;
+    top: 15px;
+}

@@ -1,6 +1,6 @@
 #container {
   margin: auto;
-  width: 980px;
+  width: 900px;
 }
 
 #top-bar {
@@ -10,8 +10,8 @@
 
 #content {
   margin: 0 auto;
-  padding: 32px 10px 18px 10px;
-  position: relative;
+  padding: 17px 10px 18px 10px;
+  /*position: relative;*/
 }
 
 #footer {

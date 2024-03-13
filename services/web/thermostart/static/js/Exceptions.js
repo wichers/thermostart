@@ -29,7 +29,7 @@ ts.initializeExceptions = function(thermostat, $scheduleContainer, $stencilConta
         model: new (ts.ExceptionsCollection.extend({
             blockMinSize: ts.EXCEPTIONS_RESOLUTION
         })),
-        columnWidth: (opts.width || 650) / 7,
+        columnWidth: (opts.width || 600) / 7,
         rows: ts.EXCEPTIONS_ROWS,
         rowHeight: (opts.height || 550) / ts.EXCEPTIONS_ROWS,
         blockSmallSize: ts.EXCEPTIONS_RESOLUTION,

@@ -23,6 +23,7 @@
    text-align: center;
    color: #ffffff;
    z-index: 1;
+   margin-top: 2px;
 }
 
 .slice.head {
@@ -375,7 +376,7 @@ Side bar.
    padding: 0;
    line-height: 20px;   /* by default, it is set using rowHeight in JS */
    position: relative;
-   top: -1px;
+   top: -4px;
 }
 
 .schedule-container .sidebar li {

@@ -2,6 +2,18 @@
     height: 390px;
 }
 
+#authentication-container{
+    width: 900px;
+    position: relative;
+    top: 15px;
+}
+
+.register-container{
+    width: 900px;
+    position: relative;
+    top: 15px;
+}
+
 #login-container{
     height: 200px;
 }

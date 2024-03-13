@@ -160,10 +160,11 @@ $(function() {
     var app = window.app = new App();
     Backbone.history.start();
 
+    // JVO issue on mobile where the click is always handled, menu item is enough
     // GOTO exceptions agenda if the overview contains is clicked. Dirty but functional ;-)
-    $('.overview-container').on('click touchstart', function() {
-        app.navigate('exceptions', { trigger: true });
-    });
+    //$('.overview-container').on('click touchstart', function() {
+    //    app.navigate('exceptions', { trigger: true });
+    //});
 
 });
 

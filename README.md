@@ -14,6 +14,9 @@ In the root folder, copy `.env.example` file and name the new file `.env.dev`.
 You may change the values as you need, especially it's a good practice to set
 unique SECRET_KEY - at least change some characters there :)
 
+When you're debugging and you want to re-create the database after restart,
+you need to add FLASK_DEBUG=1 to your environment file.
+
 After that stay in the root folder and use following commands:
 ```
 # give permissions to your entrypoint.sh file
@@ -67,7 +70,7 @@ docker start thermostart-web-1
 
 ## Production
 Basically it's the same way as dev server, but you need to use different files:
-- create .env.prod for environment variables (without FLASK_DEBUG):
+- create .env.prod for environment variables:
   - `APP_FOLDER=/home/app/web`
   - `DATABASE_URL= <URL with proper database data>`
 

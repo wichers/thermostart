@@ -35,7 +35,7 @@ FIRMWARE_VERSIONS = [
     {"hw": 4, "filename": "TS_HW4_30040043.hex", "version": 30040043},
     {"hw": 5, "filename": "TS_HW5_30050046.hex", "version": 30050046},
 ]
-UPGRADED_VERSION_MINOR = 200
+UPGRADED_VERSION_MINOR = 100
 
 
 def firmware_upgrade_needed(hw, fw):

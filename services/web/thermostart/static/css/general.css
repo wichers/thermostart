@@ -52,9 +52,9 @@ h2 {
   font-weight: 600;
   font-size: 16px;
   padding-bottom: 10px;
-  padding-left: 10px;
+  padding-left: 20px;
   border-bottom: 1px dashed #dedede;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 h3 {
@@ -202,24 +202,21 @@ small {
 
 /* Windows */
 .window-large {
-   width: fit-content;
+   width: 960px;
    -webkit-user-select: none;
    -khtml-user-select: none;
    -moz-user-select: none;
    -o-user-select: none;
    user-select: none;
    background-color: #ffffff;
-   -moz-border-radius: 4px;
+  -moz-border-radius: 4px;
    -webkit-border-radius: 4px;
-   border-radius: 4px;
-   position: absolute;
-   top: 0px;
-
+    border-radius: 4px;
 }
 
 .window-container {
     display: inline-block;
-    width: 900px;
+    width: 100%;
 }
 
 /* Icons */
@@ -721,34 +718,4 @@ button:hover, input[type="submit"]:hover {
     font-size: 8px;
     margin-left: 5px;
     cursor: pointer;
-}
-#temperature-now-container {
-   position: absolute;
-   /*top: 15px;*/
-   /*left: 10px;*/
-   width: 200px;
-   height: 640px;
-   -moz-box-sizing: border-box;
-   box-sizing: border-box;
-   -webkit-user-select: none;
-   -khtml-user-select: none;
-   -moz-user-select: none;
-   -o-user-select: none;
-   user-select: none;
-   background-color: white;
-   -webkit-border-radius: 4px;
-   -moz-border-radius: 4px;
-   border-radius: 4px;
-}
-#current-week-container {
-    left: 210px;
-    position: absolute;
-    margin-bottom: 20px;
-    width: 690px;
-    top: 0px;
-}
-.account-container {
-    width: 900px;
-    position: relative;
-    top: 15px;
 }

@@ -5,7 +5,6 @@
 .exceptions-date-picker .ui-datepicker{
   width:13em;
   border:none;
-  position: relative;
 }
 
 .exceptions-date-picker .ui-datepicker-header{
@@ -24,11 +23,6 @@
 #exceptions-container .exceptions-programs .touch-controls button {
     margin: 5px 0;
     width: 150px;
-}
-
-#exceptions-container .schedule-stencil {
-    left: 15px;
-    position: absolute;
 }
 
 #exceptions-container .schedule-stencil-block-button {

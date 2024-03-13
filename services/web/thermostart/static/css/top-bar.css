@@ -1,11 +1,11 @@
 #logo {
-    position: relative;
-    /*top: 10px;*/
+    position: absolute;
+    top: 10px;
     left: 10px;
+    width: 240px;
+    height: 60px;
     background-image: url("../images/logo.png");
-    background-repeat: no-repeat;
-    height: 45px;
-    background-size: contain;
+    background-size: 240px 60px;
 }
 
 #logo.availability-indicator.available {
@@ -25,9 +25,9 @@
     background-color: #ffffff;
     padding: 2px;
     position: absolute;
-    top: 50px;
-    width: 896px;
-    left: 10px;
+    top: 32px;
+    right: 10px;
+    left: 260px;
 }
 
 #navigation-links {
@@ -44,7 +44,7 @@
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
-    /*margin-right: 20px;*/
+    margin-right: 20px;
     line-height: 28px;
 }
 

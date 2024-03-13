@@ -1,11 +1,10 @@
 #settings-container .window-large {
     height: auto;
-    width: fit-content;
 }
 
 .settings-container {
     display: inline-block;
-    width: 900px;
+    width: 100%;
 }
 
 .settings-container .temperature-calibration-toggle, .settings-container .dim-toggle {

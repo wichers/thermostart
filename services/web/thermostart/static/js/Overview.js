@@ -27,7 +27,7 @@ ts.initializeOverview = function(thermostat, $scheduleContainer, opts) {
     
     var scheduleView = new ts.ScheduleView({
         model: new ts.RelaxedCollection,
-        columnWidth: (opts.scheduleWidth || 600) / 7,
+        columnWidth: (opts.scheduleWidth || 610) / 7,
         rows: ts.OVERVIEW_ROWS,
         rowHeight: (opts.scheduleHeight || 550) / ts.OVERVIEW_ROWS,
         linesDensity: ts.OVERVIEW_RESOLUTION,

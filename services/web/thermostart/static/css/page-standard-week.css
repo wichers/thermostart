@@ -1,11 +1,11 @@
 .week-container {
    display:inline-block;
-   width: 690px;
+    width: 730px;
    -moz-box-sizing: border-box;
    box-sizing: border-box;
 }
 
-/*.program-container {
+.program-container {
    display: inline-block;
    vertical-align: top;
    width: 230px;
@@ -13,19 +13,18 @@
    -moz-box-sizing: border-box;
    box-sizing: border-box;
    position: absolute;
-}*/
+}
 
 .program-container > div, .program-container > p {
-    margin: 10px 10px 10px 10px;
+    margin: 10px 15px 10px 27px;
 }
 
 .program-container > h2:first-child {
-    padding-left: 10px;
-    padding-top: 10px;
+    padding-left: 27px;
 }
 
 .program-container > h2:nth-of-type(2) {
-    margin-left: 10px;
+    margin-left: 27px;
     padding-left: 0px;
 }
 
@@ -37,9 +36,6 @@
    width: 150px;
 }
 
-.standard-week-container .standard-week-programs {
-   margin: 10px;
-}
 .standard-week-container {
    padding-left: 20px;
 }
@@ -83,8 +79,8 @@
 
 .standard-week-programs .schedule-stencil-block {
     border: 1px dashed #dedede;
-    /*margin: 5px auto;
-    padding-left: 3px;*/
+    margin: 5px auto;
+    padding-left: 3px;
     width: 180px;
    -webkit-border-radius: 4px;
    -moz-border-radius: 4px;

@@ -1,6 +1,6 @@
 
 .overview-container .schedule-container .sidebar {
-    top: 0px;
+    top: 3px;
     line-height: 11px !important;
 }
 
@@ -55,9 +55,9 @@
    border-radius: 4px;
 }
 
-/*#temperature-now-container {
+#temperature-now-container {
    position: absolute;
-   left: 10px;
+   right: 10px;
    width: 245px;
    height: 600px;
    -moz-box-sizing: border-box;
@@ -71,18 +71,18 @@
    -webkit-border-radius: 4px;
    -moz-border-radius: 4px;
    border-radius: 4px;
-}*/
+}
 
 #temperature-now-container .widget {
     min-height: 60px;
 }
 /*************** Current week styling ****************/
 
-/*#current-week-container {
-   width: 700px;
-   float: right;
+#current-week-container {
+   width: 642px;
+   float: left;
    margin-bottom: 20px;
-}*/
+}
 
 #current-week-container .week-container > p {
    /*padding: 5px;*/
@@ -131,15 +131,15 @@
    display: none !important;
 }
 
-/*.overview-container .sidebar {
+.overview-container .sidebar {
    float:left;
    width: 40px;
    margin: 0;
    padding: 0;
-   line-height: 20px;   /* by default, it is set using rowHeight in JS 
+   line-height: 20px;   /* by default, it is set using rowHeight in JS */
    position: relative;
-   top: -5px;
-}*/
+   top: -1px;
+}
 
 .overview-container .sidebar li {
    list-style-type: none;
@@ -154,14 +154,14 @@
     color: #666666;
 }
 
-/*.overview-container .schedule-container {
+.overview-container .schedule-container {
    cursor: pointer;
-}*/
+}
 
 .overview-container .schedule-container .topbar {
    z-index: 1;
    color: #999999;
-   /*left: 43px;*/
+   left: 43px;
 }
 .overview-container .schedule-container .topbar li {
    font-weight: normal;
@@ -184,10 +184,8 @@
     opacity: 1; 
 }
 
-#overview-container .overview-icon {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+#overview-container .week-container {
+    width: 100%;
 }
 
 #current-week-container .indicator {
@@ -229,8 +227,7 @@
 }
 
 #overview-container .widget {
-    /*padding: 10px 10px 20px 10px;*/
-    position: relative;
+    padding: 10px 10px 20px 10px;
 }
 
 #current-week-container .line {
@@ -257,7 +254,7 @@
 }
 
 
-/* weather */
+/* wheather */
 
 #outside-temperature img {
    -webkit-border-radius: 5px;
@@ -272,11 +269,7 @@
 }
 
 #outside-temperature .left {
-    width: 60px;
-}
-
-#outside-temperature .right {
-    font-size: large;
+    width: 40px;
 }
 /* pause widget */
 
@@ -347,10 +340,6 @@
     height: 20px;
 }
 
-#adjust-temp-container {
-   margin-top: 10px;
-}
-
 /* adjust temperature widget */
 #adjust-temp-container.min-temperature .button-lower,
 #adjust-temp-container.max-temperature .button-higher {
@@ -359,8 +348,7 @@
 
 #adjust-temp-container .measured {
     line-height: 20px;
-    margin-top: 10px;
-    font-size: larger;
+    margin-top: 5px;
 }
 
 #adjust-temp-container .measured span {

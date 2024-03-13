@@ -15,8 +15,8 @@ from .utils import (
     Source,
     decrypt_request,
     encrypt_response,
-    firmware_upgrade_needed,
     get_patched_firmware_by_hw_version,
+    upgraded_needed,
 )
 
 ts = Blueprint("ts", __name__)
@@ -46,16 +46,14 @@ def firmware_update():
 
     hw = int(tsreq["hw"][0])
 
-    print("request to upgrade", hw, tsreq)
+    print('request to upgrade', hw, tsreq)
 
     data = get_patched_firmware_by_hw_version(hw, device.host, device.port)
     if hw < 5:
         CHUNK_SIZE = 1023
         data = encrypt_response(data, device.password)
-        data_chunks = [
-            data[i : i + CHUNK_SIZE] for i in range(0, len(data), CHUNK_SIZE)
-        ]
-        data = b"\x00".join(data_chunks)
+        data_chunks = [data[i:i + CHUNK_SIZE] for i in range(0, len(data), CHUNK_SIZE)]
+        data = b'\x00'.join(data_chunks)
     elif hw == 5:
         data = encrypt_response(data, device.password, False)
 
@@ -194,7 +192,7 @@ def api():
 
     # do we need to update?
     # TODO: reverse engineer firmware web guided update process (firmware update process currently stalls at 13%)
-    # if firmware_upgrade_needed(hw, fw):
+    # if upgraded_needed(hw, fw):
     #     xml += '<FW>1</FW>'
 
     if int(tsreq["pv"][0]) != device.measured_temperature:

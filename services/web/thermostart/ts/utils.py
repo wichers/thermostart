@@ -38,8 +38,12 @@ FIRMWARE_VERSIONS = [
 UPGRADED_VERSION_MINOR = 200
 
 
-def upgraded_needed(hw, fw):
-    return next(item for item in FIRMWARE_VERSIONS if item["version"] + UPGRADED_VERSION_MINOR != fw and item["hw"] == hw)
+def firmware_upgrade_needed(hw, fw):
+    return next(
+        item
+        for item in FIRMWARE_VERSIONS
+        if item["version"] + UPGRADED_VERSION_MINOR != fw and item["hw"] == hw
+    )
 
 
 def decrypt_request(request, passwd):

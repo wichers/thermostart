@@ -1,14 +1,11 @@
-from flask import Blueprint, redirect, render_template
+from flask import Blueprint, redirect, render_template, url_for
+from flask_login import current_user
 
 main = Blueprint("main", __name__)
 
 
 @main.route("/")
 def homepage():
-    return redirect("/ui")
-
-
-@main.route("/about")
-def about_page():
-    context = {"title": "About page"}
-    return render_template("about.html", **context)
+    if current_user.is_authenticated:
+        return redirect("/ui")
+    return redirect(url_for("auth.login_page"))

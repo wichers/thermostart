@@ -87,43 +87,43 @@
 }
 
 .slice .edit-button {
-   background: transparent url("/static/images/icon_Edit_White_01.png") no-repeat center center;
+   background: transparent url("../images/icon_Edit_White_01.png") no-repeat center center;
 }
 
 .slice .remove-button {
-   background: transparent url("/static/images/icon_Close_White_01.png") no-repeat center center;
+   background: transparent url("../images/icon_Close_White_01.png") no-repeat center center;
 }
 
 .schedule.hoverable .block.in-operation .slice[data-type="anti_freeze"] .edit-button {
-   background: transparent url("/static/images/icon_Edit_DarkBlue_01.png") no-repeat center center;
+   background: transparent url("../images/icon_Edit_DarkBlue_01.png") no-repeat center center;
 }
 
 .schedule.hoverable .block.in-operation .slice[data-type="not_home"] .edit-button {
-   background: transparent url("/static/images/icon_Edit_LightBlue_01.png") no-repeat center center;
+   background: transparent url("../images/icon_Edit_LightBlue_01.png") no-repeat center center;
 }
 
 .schedule.hoverable .block.in-operation .slice[data-type="home"] .edit-button {
-   background: transparent url("/static/images/icon_Edit_Orange_01.png") no-repeat center center;
+   background: transparent url("../images/icon_Edit_Orange_01.png") no-repeat center center;
 }
 
 .schedule.hoverable .block.in-operation .slice[data-type="comfort"] .edit-button {
-   background: transparent url("/static/images/icon_Edit_Red_01.png") no-repeat center center;
+   background: transparent url("../images/icon_Edit_Red_01.png") no-repeat center center;
 }
 
 .schedule.hoverable .block.in-operation .slice[data-type="anti_freeze"] .remove-button {
-   background: transparent url("/static/images/icon_Close_DarkBlue_01.png") no-repeat center center;
+   background: transparent url("../images/icon_Close_DarkBlue_01.png") no-repeat center center;
 }
 
 .schedule.hoverable .block.in-operation .slice[data-type="not_home"] .remove-button {
-   background: transparent url("/static/images/icon_Close_LightBlue_01.png") no-repeat center center;
+   background: transparent url("../images/icon_Close_LightBlue_01.png") no-repeat center center;
 }
 
 .schedule.hoverable .block.in-operation .slice[data-type="home"] .remove-button {
-   background: transparent url("/static/images/icon_Close_Orange_01.png") no-repeat center center;
+   background: transparent url("../images/icon_Close_Orange_01.png") no-repeat center center;
 }
 
 .schedule.hoverable .block.in-operation .slice[data-type="comfort"] .remove-button {
-   background: transparent url("/static/images/icon_Close_Red_01.png") no-repeat center center;
+   background: transparent url("../images/icon_Close_Red_01.png") no-repeat center center;
 }
 
 .slice .handle {
@@ -161,7 +161,7 @@
 
 
 /***************************************************
- * Colors for different block temperatures. 
+ * Colors for different block temperatures.
  ***************************************************/
 /*
 .schedule.hoverable .block:hover {
@@ -248,19 +248,19 @@
 
 .schedule .slice[data-type="anti_freeze"] {
     background-color: #0097dd;
-    border: 1px solid #0097dd; 
+    border: 1px solid #0097dd;
 }
 .schedule .slice[data-type="not_home"] {
     background-color: #31baf9;
-    border: 1px solid #31baf9; 
+    border: 1px solid #31baf9;
 }
 .schedule .slice[data-type="home"] {
     background-color: #ff8000;
-    border: 1px solid #ff8000; 
+    border: 1px solid #ff8000;
 }
 .schedule .slice[data-type="comfort"] {
     background-color: #ff4800;
-    border: 1px solid #ff4800; 
+    border: 1px solid #ff4800;
 }
 
 .schedule .slice[data-type="anti_freeze"] .handle {

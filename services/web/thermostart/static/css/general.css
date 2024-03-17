@@ -151,7 +151,7 @@ small {
 #uservoice-link {
    width: 33px;
    height: 208px;
-   background-image: url('static/images/uservoice.png');
+   background-image: url('../images/uservoice.png');
    position: fixed;
    display: block;
    top: 30%;
@@ -231,131 +231,131 @@ small {
 }
 
 .icon-facebook {
-    background: transparent url("/static/images/icon_Facebook.png") no-repeat center center;
+    background: transparent url("../images/icon_Facebook.png") no-repeat center center;
 }
 .icon-twitter {
-    background: transparent url("/static/images/icon_Twitter.png") no-repeat center center;
+    background: transparent url("../images/icon_Twitter.png") no-repeat center center;
 }
 .icon-google {
-    background: transparent url("/static/images/icon_Google.png") no-repeat center center;
+    background: transparent url("../images/icon_Google.png") no-repeat center center;
 }
 .icon-user {
-    background: transparent url("/static/images/icon_Profile.png") no-repeat center center;
+    background: transparent url("../images/icon_Profile.png") no-repeat center center;
 }
 .icon-user-small {
-    background: transparent url("/static/images/icon_Profile_small.png") no-repeat center center;
+    background: transparent url("../images/icon_Profile_small.png") no-repeat center center;
     width: 30px;
     height: 23px;
     margin-top: -3px;
 }
 .icon-leave {
-    background: transparent url("/static/images/icon_logout.png") no-repeat center center;
+    background: transparent url("../images/icon_logout.png") no-repeat center center;
     width: 30px;
     height: 23px;
     margin-top: -3px;
 }
 .icon-gripper {
-    background: transparent url("/static/images/icon_Handler_white_alpha.png") no-repeat center center;
+    background: transparent url("../images/icon_Handler_white_alpha.png") no-repeat center center;
     width: 18px;
     height: 33px;
 }
 
 .icon-gripper-small {
-   background: transparent url("/static/images/icon_Handler_small.png") no-repeat center center;
+   background: transparent url("../images/icon_Handler_small.png") no-repeat center center;
    width: 20px;
    height: 20px;
 }
 
 .icon-settings {
-   background: transparent url("/static/images/icon_Edit.png") no-repeat center center;
+   background: transparent url("../images/icon_Edit.png") no-repeat center center;
 }
 
 .icon-settings-small {
-    background: transparent url("/static/images/icon_Edit_small.png") no-repeat center center;
+    background: transparent url("../images/icon_Edit_small.png") no-repeat center center;
     width: 20px;
     height: 20px;
 }
 
 .icon-pause {
-    background: transparent url("/static/images/icon_Program_Pause.png") no-repeat center center;
+    background: transparent url("../images/icon_Program_Pause.png") no-repeat center center;
 }
 
 .icon-plus {
-    background: transparent url("/static/images/icon_buttonPlus_white.png") no-repeat center center;
+    background: transparent url("../images/icon_buttonPlus_white.png") no-repeat center center;
     vertical-align: initial;
     width: 30px;
     height: 30px;
 }
 .icon-minus {
-    background: transparent url("/static/images/icon_buttonMinus_white.png") no-repeat center center;
+    background: transparent url("../images/icon_buttonMinus_white.png") no-repeat center center;
     vertical-align: initial;
     width: 30px;
     height: 30px;
 }
 
 .icon-thermometer {
-    background: transparent url("/static/images/icon_Temperature_Default.png") no-repeat center center;
+    background: transparent url("../images/icon_Temperature_Default.png") no-repeat center center;
     width: 30px;
     height: 40px;
 }
 .icon-thermometer-minus {
-    background: transparent url("/static/images/icon_Temperature_Minus.png") no-repeat center center;
+    background: transparent url("../images/icon_Temperature_Minus.png") no-repeat center center;
     width: 30px;
     height: 40px;
 }
 .icon-thermometer-plus {
-    background: transparent url("/static/images/icon_Temperature_Plus.png") no-repeat center center;
+    background: transparent url("../images/icon_Temperature_Plus.png") no-repeat center center;
     width: 30px;
     height: 40px;
 }
 
 .icon-clock {
-    background: transparent url("/static/images/icon_Program_Running.png") no-repeat center center;
+    background: transparent url("../images/icon_Program_Running.png") no-repeat center center;
 }
 .icon-manual {
-    background: transparent url("/static/images/icon_Manual.png") no-repeat center center;
+    background: transparent url("../images/icon_Manual.png") no-repeat center center;
 }
 .icon-api-bindings {
-    background: transparent url("/static/images/icon_Bindings.svg") no-repeat center center;
+    background: transparent url("../images/icon_Bindings.svg") no-repeat center center;
 }
 .icon-auto-pause {
-    background: transparent url("/static/images/icon_auto_pause.png") no-repeat center center;
+    background: transparent url("../images/icon_auto_pause.png") no-repeat center center;
     background-size: contain;
 }
 .icon-factory-settings {
-    background: transparent url("/static/images/icon_Factory.png") no-repeat center center;
+    background: transparent url("../images/icon_Factory.png") no-repeat center center;
 }
 .icon-brighter {
-    background: transparent url("/static/images/icon_Sun.png") no-repeat center center;
+    background: transparent url("../images/icon_Sun.png") no-repeat center center;
     width: 30px;
     height: 30px;
     vertical-align: initial;
 }
 .icon-darker {
-    background: transparent url("/static/images/icon_Moon.png") no-repeat center center;
+    background: transparent url("../images/icon_Moon.png") no-repeat center center;
     width: 30px;
     height: 30px;
     vertical-align: initial;
 }
 
 .icon-dim {
-    background: transparent url("/static/images/icon_Brightness.png") no-repeat center center;
+    background: transparent url("../images/icon_Brightness.png") no-repeat center center;
 }
 .icon-locale {
-    background: transparent url("/static/images/icon_Locale.png") no-repeat center center;
+    background: transparent url("../images/icon_Locale.png") no-repeat center center;
 }
 .icon-led {
-    background: transparent url("/static/images/icon_Info.png") no-repeat center center;
+    background: transparent url("../images/icon_Info.png") no-repeat center center;
 }
 
 .icon-calibration {
-    background: transparent url("/static/images/icon_Temperature_Calibration.png") no-repeat center center;
+    background: transparent url("../images/icon_Temperature_Calibration.png") no-repeat center center;
     width: 48px;
     height: 48px;
 }
 
 .icon-reports {
-    background: transparent url("/static/images/icon_Info.png") no-repeat center center;
+    background: transparent url("../images/icon_Info.png") no-repeat center center;
     width: 48px;
     height: 48px;
 }

@@ -134,7 +134,7 @@ $(function() {
     // Broker setup.
     // -------------
     
-    var broker = window.broker = io();
+    var broker = window.broker = io({path: appPath + 'socket.io'});
     
     broker.on('error', function(reason) {
         console.error('Unable to establish RT communication channel.', reason);

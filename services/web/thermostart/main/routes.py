@@ -7,5 +7,5 @@ main = Blueprint("main", __name__)
 @main.route("/")
 def homepage():
     if current_user.is_authenticated:
-        return redirect("/ui")
+        return redirect(url_for("ui.home"))
     return redirect(url_for("auth.login_page"))

@@ -18,7 +18,7 @@ var ProfileView = Backbone.View.extend({
         var xhr = $.ajax({
           type: 'POST',
           dataType: 'json',
-          url: '/account-cities',
+          url: 'account-cities',
           data: { country: param }
         });
     

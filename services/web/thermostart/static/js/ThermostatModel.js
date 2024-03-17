@@ -1,7 +1,7 @@
 var ThermostatModel = Backbone.Model.extend({
 
     defaults: {
-        url: '/thermostatmodel'
+        url: 'thermostatmodel'
     },
 
     isDemoAccount: function(username) {

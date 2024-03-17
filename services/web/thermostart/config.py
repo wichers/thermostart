@@ -14,4 +14,4 @@ class Config:
     # In app values that are changeable via environment variables
     AI_MOVE_DELAY_SECONDS = float(os.getenv("AI_MOVE_DELAY_SECONDS", 1.5))
 
-    APPLICATION_ROOT = os.getenv("SCRIPT_NAME", "/")
+    APPLICATION_ROOT = os.getenv("APPLICATION_ROOT", "/")

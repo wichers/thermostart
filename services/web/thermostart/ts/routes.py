@@ -211,7 +211,7 @@ def api():
         if param in tsreq:
             otvalue = int(tsreq[param][0], 16)
             if otvalue != 0xDEAD and otvalue != getattr(device, param):
-                setattr(device, otvalue)
+                setattr(device, param, otvalue)
                 otchanged = True
     if otchanged:
         db.session.commit()

@@ -257,7 +257,10 @@ ts.initializeOverview = function(thermostat, $scheduleContainer, opts) {
     function updateIndicator() {
 
         var now = thermostat.getCurrentMoment();
-        var gridCoordinates = { x: now.isoWeekday() - 1, y: now.hours() * ts.OVERVIEW_RESOLUTION };
+
+        // JVO overview rows contains the window height, so changed to a minute accurate indicator
+        var indicatorPosition = ts.OVERVIEW_ROWS / 1440 * ((now.hours() * 60) + now.minutes());
+        var gridCoordinates = { x: now.isoWeekday() - 1, y: indicatorPosition };
 
         $dayIndicator.css('top', gridCoordinates.y * scheduleView.options.rowHeight);
 

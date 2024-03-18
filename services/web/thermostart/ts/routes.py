@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 from urllib.parse import parse_qs
 
 import requests
-from flask import Blueprint, Response, request
+from flask import Blueprint, Response, make_response, request
 from flask_socketio import emit
 
 from thermostart import db
@@ -50,16 +50,20 @@ def firmware_update():
 
     data = get_patched_firmware_by_hw_version(hw, device.host, device.port)
     if hw < 5:
-        CHUNK_SIZE = 1023
+        # CHUNK_SIZE = 527
+        # data = encrypt_response(data, device.password)
+        # data_chunks = [
+        #     data[i : i + CHUNK_SIZE] for i in range(20, len(data), CHUNK_SIZE)
+        # ]
+        # data = data[:20] + b"\x00"
+        # data += b"\x00".join(data_chunks)
         data = encrypt_response(data, device.password)
-        data_chunks = [
-            data[i : i + CHUNK_SIZE] for i in range(0, len(data), CHUNK_SIZE)
-        ]
-        data = b"\x00".join(data_chunks)
     elif hw == 5:
         data = encrypt_response(data, device.password, False)
 
-    return Response(response=data, status=200, mimetype="application/octet-stream")
+    response = make_response(data)
+    response.headers.set("Content-Type", "text/plain")
+    return response
 
 
 @ts.route("/api")
@@ -181,6 +185,37 @@ def api():
         device.cal_synced = True
         db.session.commit()
 
+    if "oo" in tsreq:
+        oo = int(tsreq["oo"][0])
+        if oo != device.oo:
+            device.oo = oo
+            db.session.commit()
+
+    otparams = [
+        "ot0",
+        "ot1",
+        "ot3",
+        "ot17",
+        "ot18",
+        "ot19",
+        "ot25",
+        "ot26",
+        "ot27",
+        "ot28",
+        "ot34",
+        "ot56",
+        "ot125",
+    ]
+    otchanged = False
+    for param in otparams:
+        if param in tsreq:
+            otvalue = int(tsreq[param][0], 16)
+            if otvalue != 0xDEAD and otvalue != getattr(device, param):
+                setattr(device, otvalue)
+                otchanged = True
+    if otchanged:
+        db.session.commit()
+
     hw = int(tsreq["hw"][0])
     if hw != device.hw:
         hw = int(tsreq["hw"][0])
@@ -194,8 +229,9 @@ def api():
 
     # do we need to update?
     # TODO: reverse engineer firmware web guided update process (firmware update process currently stalls at 13%)
+    # print("upgrade needed?", fw, hw)
     # if firmware_upgrade_needed(hw, fw):
-    #     xml += '<FW>1</FW>'
+    #     xml += "<FW>1</FW>"
 
     if int(tsreq["pv"][0]) != device.measured_temperature:
         device.measured_temperature = tsreq["pv"][0]

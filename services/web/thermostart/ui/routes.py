@@ -40,6 +40,20 @@ def thermostatmodel():
         fw=current_user.fw,
         hw=current_user.hw,
         utc_offset=current_user.utc_offset_in_seconds() / 3600,
+        oo=current_user.oo,
+        ot0=current_user.ot0,
+        ot1=current_user.ot1,
+        ot3=current_user.ot3,
+        ot17=current_user.ot17,
+        ot18=current_user.ot18,
+        ot19=current_user.ot19,
+        ot25=current_user.ot25,
+        ot26=current_user.ot26,
+        ot27=current_user.ot27,
+        ot28=current_user.ot28,
+        ot34=current_user.ot34,
+        ot56=current_user.ot56,
+        ot125=current_user.ot125,
     )
 
 

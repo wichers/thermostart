@@ -124,6 +124,20 @@ class Device(UserMixin, db.Model):
     cal_synced = db.Column(db.Boolean, default=False)
     cal_version = db.Column(db.Integer, default=1)
     creation_time = db.Column(DateTime(timezone=True), server_default=func.now())
+    oo = db.Column(db.Integer, default=0)
+    ot0 = db.Column(db.Integer, default=0)
+    ot1 = db.Column(db.Integer, default=0)
+    ot3 = db.Column(db.Integer, default=0)
+    ot17 = db.Column(db.Integer, default=0)
+    ot18 = db.Column(db.Integer, default=0)
+    ot19 = db.Column(db.Integer, default=0)
+    ot25 = db.Column(db.Integer, default=0)
+    ot26 = db.Column(db.Integer, default=0)
+    ot27 = db.Column(db.Integer, default=0)
+    ot28 = db.Column(db.Integer, default=0)
+    ot34 = db.Column(db.Integer, default=0)
+    ot56 = db.Column(db.Integer, default=0)
+    ot125 = db.Column(db.Integer, default=0)
 
     order = ["hardware_id", "password"]
 

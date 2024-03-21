@@ -287,14 +287,15 @@ def api():
 
         pause = int(device.source == Source.PAUSE.value)
         xml += f"<PAUSE>{pause}</PAUSE>"
-        xml += f"<INIT><SRC>{device.source}</SRC></INIT>"
+        xml += (
+            f"<INIT><SRC>{device.source}</SRC><LOCALE>{device.locale}</LOCALE></INIT>"
+        )
         xml += f"<SVSET>{device.set_temperature}</SVSET>"
         xml += f"<BVSET>{device.outside_temperature}</BVSET>"
         xml += f"<TA>{device.ta}</TA>"
         xml += f"<DIM>{device.dim}</DIM>"
         xml += f"<SLS>{device.sl}</SLS>"
         xml += f"<SD>{device.sd}</SD>"
-        xml += f"<LOCALE>{device.locale}</LOCALE>"
 
     # is there a change from the webinterface?
     elif device.ui_synced is False:
@@ -304,16 +305,6 @@ def api():
             pause = int(device.source == Source.PAUSE.value)
             xml += f"<PAUSE>{pause}</PAUSE>"
             xml += f"<INIT><SRC>{device.source}</SRC></INIT>"
-        elif device.ui_source == "temperature_calibration":
-            xml += f"<TA>{device.ta}</TA>"
-        elif device.ui_source == "dim_toggle":
-            xml += f"<DIM>{device.dim}</DIM>"
-        elif device.ui_source == "locale_toggle":
-            xml += f"<INIT><LOCALE>{device.locale}</LOCALE></INIT>"
-        elif device.ui_source == "statusled_toggle":
-            xml += f"<SLS>{device.sl}</SLS>"
-        elif device.ui_source == "display_mode_toggle":
-            xml += f"<SD>{device.sd}</SD>"
         elif (
             device.ui_source == "direct_temperature_setter_up"
             or device.ui_source == "direct_temperature_setter_down"
@@ -321,6 +312,12 @@ def api():
             xml += "<PAUSE>0</PAUSE>"
             xml += f"<INIT><SRC>{device.source}</SRC></INIT>"
             xml += f"<SVSET>{device.set_temperature}</SVSET>"
+        else:
+            xml += f"<TA>{device.ta}</TA>"
+            xml += f"<DIM>{device.dim}</DIM>"
+            xml += f"<INIT><LOCALE>{device.locale}</LOCALE></INIT>"
+            xml += f"<SLS>{device.sl}</SLS>"
+            xml += f"<SD>{device.sd}</SD>"
 
         # we have synced to the device
         device.ui_synced = True

@@ -3,6 +3,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 
 from thermostart import db
 from thermostart.auth.forms import LoginForm, RegistrationForm, UpdateAccountForm
+from thermostart.config import Config
 from thermostart.models import Device, Location
 
 auth = Blueprint("auth", __name__)
@@ -34,18 +35,33 @@ def register_page():
 
 @auth.route("/login", methods=["GET", "POST"])
 def login_page():
-    form = LoginForm()
-    if form.validate_on_submit():
-        device = Device.query.filter_by(hardware_id=form.hardware_id.data).first()
-        try:
-            if device and device.password == form.password.data:
-                login_user(user=device)
-                flash(f"{device.hardware_id}, you have been logged in!", "success")
-                return redirect(url_for("ui.home"))
-        except ValueError:
-            pass
-        flash("Login unsuccessful. Please check hardware_id and password", "danger")
-    return render_template("login.html", title="Login", form=form)
+    if len(Config.AUTOLOGIN_USER) > 0 and len(Config.AUTOLOGIN_PASSWORD) > 0:
+        device = Device.query.filter_by(hardware_id=Config.AUTOLOGIN_USER).first()
+        if not device:
+            device = Device(
+                hardware_id=Config.AUTOLOGIN_USER, password=Config.AUTOLOGIN_PASSWORD
+            )
+            device.location_id = 3145  # Default to Amsterdam
+            db.session.add(device)
+            db.session.commit()
+        elif device.password != Config.AUTOLOGIN_PASSWORD:
+            device.password = Config.AUTOLOGIN_PASSWORD
+            db.session.commit()
+        login_user(user=device)
+        return redirect(url_for("ui.home"))
+    else:
+        form = LoginForm()
+        if form.validate_on_submit():
+            device = Device.query.filter_by(hardware_id=form.hardware_id.data).first()
+            try:
+                if device and device.password == form.password.data:
+                    login_user(user=device)
+                    flash(f"{device.hardware_id}, you have been logged in!", "success")
+                    return redirect(url_for("ui.home"))
+            except ValueError:
+                pass
+            flash("Login unsuccessful. Please check hardware_id and password", "danger")
+        return render_template("login.html", title="Login", form=form)
 
 
 @auth.route("/logout", methods=["GET"])

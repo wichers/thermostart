@@ -125,21 +125,11 @@ def api():
     if device.cal_synced is False:
         xml += "<CAL>"
 
-        # tm_wday in thermostat starts at 0 being Sunday, webinterface says 0 is Monday
-        tm_wday = [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            0,
-        ]  # "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
-
         std_week = ""
         for block in device.standard_week:
             std_week = std_week + "s{:01d}{:02d}{:02d}{:03d}{:01d}".format(
-                tm_wday[block["start"][0]],
+                # Monday-Sunday (1-7)
+                block["start"][0] + 1,
                 block["start"][1],
                 block["start"][2],
                 device.predefined_temperatures[block["temperature"]],

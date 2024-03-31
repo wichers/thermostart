@@ -35,11 +35,11 @@ def register_page():
 
 @auth.route("/login", methods=["GET", "POST"])
 def login_page():
-    if len(Config.AUTOLOGIN_USER) > 0 and len(Config.AUTOLOGIN_PASSWORD) > 0:
-        device = Device.query.filter_by(hardware_id=Config.AUTOLOGIN_USER).first()
+    if len(Config.AUTOLOGIN_USERNAME) > 0 and len(Config.AUTOLOGIN_PASSWORD) > 0:
+        device = Device.query.filter_by(hardware_id=Config.AUTOLOGIN_USERNAME).first()
         if not device:
             device = Device(
-                hardware_id=Config.AUTOLOGIN_USER, password=Config.AUTOLOGIN_PASSWORD
+                hardware_id=Config.AUTOLOGIN_USERNAME, password=Config.AUTOLOGIN_PASSWORD
             )
             device.location_id = 3145  # Default to Amsterdam
             db.session.add(device)

@@ -1,4 +1,5 @@
 import csv
+import os
 
 from flask import Flask
 from flask_login import LoginManager
@@ -19,7 +20,7 @@ def fill_db(app):
 
         locations = Location.query.all()
         if not locations:
-            with open("world_cities_location_table.csv", newline="") as csvfile:
+            with open(f"{os.getenv('APP_FOLDER')}/world_cities_location_table.csv", newline="") as csvfile:
                 locationreader = csv.reader(csvfile, delimiter=";", quotechar='"')
                 for row in locationreader:
                     location = Location()

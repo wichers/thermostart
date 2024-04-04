@@ -1,4 +1,5 @@
 import base64
+import os
 from binascii import hexlify
 from enum import Enum
 
@@ -287,17 +288,19 @@ def hex2patched_eje(fin, hw, host, port):
 
 def get_patched_firmware_by_hw_version(version, host, port):
     if version == 1:
-        filename = "firmware/TS_HW1_20141018.hex"
+        filename = "TS_HW1_20141018.hex"
     elif version == 2:
-        filename = "firmware/TS_HW2_30020018.hex"
+        filename = "TS_HW2_30020018.hex"
     elif version == 3:
-        filename = "firmware/TS_HW3_30030030.hex"
+        filename = "TS_HW3_30030030.hex"
     elif version == 4:
-        filename = "firmware/TS_HW4_30040043.hex"
+        filename = "TS_HW4_30040043.hex"
     elif version == 5:
-        filename = "firmware/TS_HW5_30050046.hex"
+        filename = "TS_HW5_30050046.hex"
     else:
         raise Exception("no compatible firmware available")
+
+    filename = os.path.join(os.getenv('APP_FOLDER'), "firmware", filename)
 
     if version == 1:
         return hex2patched_eje(filename, version, host, port)

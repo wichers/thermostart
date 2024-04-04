@@ -17,6 +17,7 @@ pyinstaller --onefile -w ^
 --add-data "thermostart/static;thermostart/static" ^
 --add-data "thermostart/templates;thermostart/templates" ^
 --add-data "firmware;firmware" ^
+--add-data "world_cities_location_table.csv;." ^
 --runtime-hook thermostart_hook.py ^
 --distpath ../../dist ^
 --workpath ../../build ^

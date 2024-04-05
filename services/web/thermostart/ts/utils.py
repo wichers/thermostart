@@ -67,10 +67,10 @@ def patchfirmware(h: IntelHex, hw, host, port):
 
     # Patch #1: we patch the version number
     if hw == 1:
-        addr_lo = 0x216BC * 2
-        addr_hi = 0x216BE * 2
+        addr_lo = 0x1E0F8 * 2
+        addr_hi = 0x1E0FA * 2
 
-        assert h.gets(addr_lo, 4) == b"\xe0\x36\x25\x00"  # MOV      #0x536E, W0
+        assert h.gets(addr_lo, 4) == b"\xa0\x3d\x25\x00"  # MOV      #0x53DA, W0
         assert h.gets(addr_hi, 4) == b"\x31\x13\x20\x00"  # MOV      #0x133, W1
 
         # we use the 3rd character for our patched firmware

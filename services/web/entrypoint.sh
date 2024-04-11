@@ -1,8 +1,8 @@
 #!/bin/sh
 
 echo "Check for upgrade..."
-python manage.py has_alembic_version
-if (test $? -ne 1)
+python manage.py needs_alembic_version
+if (test $? -eq 1)
 then
     python manage.py db stamp 26422f1f63d0
 fi

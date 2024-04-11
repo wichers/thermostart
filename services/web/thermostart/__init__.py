@@ -37,7 +37,9 @@ def fill_location_db(app):
 
         locations = Location.query.all()
         if not locations:
-            with open(f"{os.getenv('APP_FOLDER')}/world_cities_location_table.csv", newline="") as csvfile:
+            with open(
+                f"{os.getenv('APP_FOLDER')}/world_cities_location_table.csv", newline=""
+            ) as csvfile:
                 locationreader = csv.reader(csvfile, delimiter=";", quotechar='"')
                 for row in locationreader:
                     location = Location()
@@ -51,12 +53,15 @@ def fill_location_db(app):
             db.session.commit()
 
 
-def has_alembic_version_in_db():
+def needs_alembic_version_in_db():
     from sqlalchemy import MetaData, create_engine
+
     metadata_obj = MetaData()
     engine = create_engine(Config.SQLALCHEMY_DATABASE_URI)
     metadata_obj.reflect(bind=engine)
-    return "alembic_version" in metadata_obj.tables
+    return (
+        "alembic_version" not in metadata_obj.tables and "location" in metadata_obj.tables
+    )
 
 
 def create_app(config_class=Config):

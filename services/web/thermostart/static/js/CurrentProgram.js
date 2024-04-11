@@ -72,7 +72,7 @@ var CurrentProgramView = Backbone.View.extend({
 
             // alternative: if we manually set the temperature to a temperature that is equal to the programmed
             // temperature we remove the manual settings mode.
-            // if (isSetManually && predefinedTemperature != this.model.get('set_temperature')) {
+            // if (isSetManually && predefinedTemperature != this.model.get('target_temperature')) {
 
             if (isSetManually) {
                 // Manual settings

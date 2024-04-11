@@ -3,18 +3,20 @@ import os
 
 from flask import Flask
 from flask_login import LoginManager
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 from thermostart.config import Config
 from thermostart.events import socketio
 
 db = SQLAlchemy()
+migrate = Migrate()
 login_manager = LoginManager()
 login_manager.login_view = "auth.login_page"
 login_manager.login_message_category = "info"
 
 
-def fill_db(app):
+def fill_location_db(app):
     with app.app_context():
         from .models import Location
 
@@ -34,11 +36,20 @@ def fill_db(app):
             db.session.commit()
 
 
+def has_alembic_version_in_db():
+    from sqlalchemy import MetaData, create_engine
+    metadata_obj = MetaData()
+    engine = create_engine(Config.SQLALCHEMY_DATABASE_URI)
+    metadata_obj.reflect(bind=engine)
+    return "alembic_version" in metadata_obj.tables
+
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
     db.init_app(app=app)
+    migrate.init_app(app, db)
     login_manager.init_app(app=app)
 
     from thermostart.auth.routes import auth  # noqa F401

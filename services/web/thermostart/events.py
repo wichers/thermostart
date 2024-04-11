@@ -23,7 +23,7 @@ def on_store_thermostat(req):
     device.host = req["host"]
     device.port = req["port"]
     device.source = req["source"]
-    device.set_temperature = req["set_temperature"]
+    device.target_temperature = req["target_temperature"]
     device.ui_synced = req["ui_synced"]
     device.ui_source = req["ui_source"]
     device.cal_synced = False

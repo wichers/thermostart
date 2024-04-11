@@ -20,19 +20,19 @@ var DirectTemperatureSetter = Backbone.View.extend({
         
         _.bindAll(this, 'adjustSetTemperature', 'adjustMeasuredTemperature');
 
-        this.model.bind('change:set_temperature', this.adjustSetTemperature);
-        this.model.bind('change:measured_temperature', this.adjustMeasuredTemperature);
+        this.model.bind('change:target_temperature', this.adjustSetTemperature);
+        this.model.bind('change:room_temperature', this.adjustMeasuredTemperature);
 
         this.setTemperatureElement = this.$('.set .temperature');
         this.measuredTemperatureElement = this.$('.measured .temperature');
 
-        this.listenTo(this.model, 'change:measured_temperature change:set_temperature', this.updateIcon);
+        this.listenTo(this.model, 'change:room_temperature change:target_temperature', this.updateIcon);
     },
 
     updateIcon: function() {
 
-        var measured = this.model.get('measured_temperature');
-        var set = this.model.get('set_temperature');
+        var measured = this.model.get('room_temperature');
+        var set = this.model.get('target_temperature');
         var $icon = $(this.options.icon);
 
         $icon.removeClass('icon-thermometer icon-thermometer-minus icon-thermometer-plus');
@@ -50,12 +50,12 @@ var DirectTemperatureSetter = Backbone.View.extend({
 
         evt.preventDefault();
 
-        var t = this.model.get('set_temperature');
+        var t = this.model.get('target_temperature');
 	if (t + this.options.step <= this.options.maxTemperature) {
 
 	    this.model.save({
                 
-                set_temperature: t + this.options.step,
+                target_temperature: t + this.options.step,
                 pause: false,
                 source: ThermostatModel.SOURCE_SERVER,
                 ui_synced: false,
@@ -71,12 +71,12 @@ var DirectTemperatureSetter = Backbone.View.extend({
 
         evt.preventDefault();
         
-        var t = this.model.get('set_temperature');
+        var t = this.model.get('target_temperature');
 	if (t - this.options.step >= this.options.minTemperature) {
             
 	    this.model.save({
 
-                set_temperature: t - this.options.step,
+                target_temperature: t - this.options.step,
                 pause: false,
                 source: ThermostatModel.SOURCE_SERVER,
                 ui_synced: false,
@@ -90,15 +90,15 @@ var DirectTemperatureSetter = Backbone.View.extend({
 
     adjustSetTemperature: function() {
         
-        this.setTemperatureElement.text((this.model.get('set_temperature') / 10).toFixed(1));
+        this.setTemperatureElement.text((this.model.get('target_temperature') / 10).toFixed(1));
 
         this.$el.removeClass('max-temperature min-temperature');
         
-	if (this.model.get('set_temperature') >= this.options.maxTemperature) {
+	if (this.model.get('target_temperature') >= this.options.maxTemperature) {
             
 	    this.$el.addClass('max-temperature');
             
-	} else if (this.model.get('set_temperature') <= this.options.minTemperature) {
+	} else if (this.model.get('target_temperature') <= this.options.minTemperature) {
             
 	    this.$el.addClass('min-temperature');
 	}
@@ -106,7 +106,7 @@ var DirectTemperatureSetter = Backbone.View.extend({
 
     adjustMeasuredTemperature: function() {
 
-        var t = (this.model.get('measured_temperature') / 10);
+        var t = (this.model.get('room_temperature') / 10);
         // Round to the nearest 0.5.
         t = Math.round(t * 2) / 2;
         

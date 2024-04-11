@@ -180,11 +180,11 @@ Backbone.sync = function(method, model, options) {
         var dataToSend = {
 
                 exceptions: model.get('exceptions'),
-                measured_temperature: model.get('measured_temperature'),
+                room_temperature: model.get('room_temperature'),
                 outside_temperature: model.get('outside_temperature'),
                 predefined_temperatures: model.get('predefined_temperatures'),
                 predefined_labels: model.get('predefined_labels'),
-                set_temperature: model.get('set_temperature'),
+                target_temperature: model.get('target_temperature'),
                 standard_week: model.get('standard_week'),
                 source: model.get('source'),
                 ui_synced: model.get('ui_synced'),

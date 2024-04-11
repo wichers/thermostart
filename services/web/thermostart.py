@@ -3,7 +3,7 @@ import os
 from engineio.async_drivers import eventlet
 from flaskwebgui import FlaskUI
 
-from thermostart import create_app, db, fill_db, socketio
+from thermostart import create_app, db, fill_location, socketio
 
 app = create_app()
 
@@ -16,7 +16,7 @@ def create_db():
             db.drop_all()
             db.create_all()
             db.session.commit()
-            fill_db(app)
+            fill_location(app)
 
 
 def start_flask(**server_kwargs):

@@ -112,10 +112,10 @@ class Device(UserMixin, db.Model):
     locale = db.Column(db.String(10), default="en-GB")
     port = db.Column(db.Integer, default=os.getenv("FLASK_PORT", 3888))
     host = db.Column(db.String(17), default=os.getenv("FLASK_HOST", "yourhostname"))
-    measured_temperature = db.Column(db.Integer, default=0)
+    room_temperature = db.Column(db.Integer, default=0)
     outside_temperature = db.Column(db.Integer, default=0)
     outside_temperature_timestamp = db.Column(db.Integer, default=0)
-    set_temperature = db.Column(db.Integer, default=0)
+    target_temperature = db.Column(db.Integer, default=0)
     source = db.Column(db.Integer, default=Source.STD_WEEK.value)
     ui_synced = db.Column(db.Boolean, default=False)
     ui_source = db.Column(db.String(40))
@@ -138,6 +138,9 @@ class Device(UserMixin, db.Model):
     ot34 = db.Column(db.Integer, default=0)
     ot56 = db.Column(db.Integer, default=0)
     ot125 = db.Column(db.Integer, default=0)
+    kp = db.Column(db.Float)
+    ti = db.Column(db.Float)
+    td = db.Column(db.Float)
 
     order = ["hardware_id", "password"]
 

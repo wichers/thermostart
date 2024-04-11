@@ -148,8 +148,8 @@ $(function() {
     });
 
     broker.on('outside_temperature', function(data) { thermostat.set(data); });
-    broker.on('measured_temperature', function(data) { thermostat.set(data); });
-    broker.on('set_temperature', function(data) { thermostat.set(data); });
+    broker.on('room_temperature', function(data) { thermostat.set(data); });
+    broker.on('target_temperature', function(data) { thermostat.set(data); });
     broker.on('source', function(data) { thermostat.set(data); });
     broker.on('location', function(data) { thermostat.set(data); });
     // A change from some other UI.

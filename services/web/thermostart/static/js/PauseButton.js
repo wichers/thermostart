@@ -62,7 +62,7 @@ var PauseButton = Backbone.View.extend({
         this.model.save({
 
             source: pause ? ThermostatModel.SOURCE_PAUSE : currentBlock.source,
-            set_temperature: pause ? pauseTemperature : predefined_temperatures[currentBlock.program],
+            target_temperature: pause ? pauseTemperature : predefined_temperatures[currentBlock.program],
             ui_synced: false,
             ui_source: 'pause_button',
             ui_change_time: new Date,

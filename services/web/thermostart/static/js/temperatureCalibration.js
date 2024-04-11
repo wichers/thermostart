@@ -47,7 +47,7 @@ ts.temperatureCalibrationToggle = Backbone.View.extend({
 
         var offset = $(evt.target).offset();
 
-        var measured = thermostat.get('measured_temperature') / 10;
+        var measured = thermostat.get('room_temperature') / 10;
         var corrected = measured + this.model.get('ta')  / 10;
 
 	var tip = measured + '°C > ' + corrected + '°C';

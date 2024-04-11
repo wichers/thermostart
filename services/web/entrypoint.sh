@@ -1,10 +1,12 @@
 #!/bin/sh
 
-if [ "$FLASK_DEBUG" = "1" ]
+echo "Check for upgrade..."
+python manage.py has_alembic_version
+if (test $? -ne 1)
 then
-    echo "Creating the database tables..."
-    python manage.py create_db
-    echo "Tables created"
+    python manage.py db stamp 26422f1f63d0
 fi
+python manage.py db upgrade
+python manage.py fill_db
 
 exec "$@"

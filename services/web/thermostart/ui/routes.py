@@ -19,12 +19,12 @@ def home():
 def thermostatmodel():
     return jsonify(
         exceptions=current_user.exceptions,
-        measured_temperature=current_user.measured_temperature,
+        room_temperature=current_user.room_temperature,
         outside_temperature=current_user.outside_temperature,
         outside_temperature_icon=None,
         predefined_temperatures=current_user.predefined_temperatures,
         predefined_labels=current_user.predefined_labels,
-        set_temperature=current_user.set_temperature,
+        target_temperature=current_user.target_temperature,
         standard_week=current_user.standard_week,
         source=current_user.source,
         ui_synced=current_user.ui_synced,

@@ -1,4 +1,5 @@
 import csv
+import logging
 import os
 
 from flask import Flask
@@ -14,6 +15,20 @@ migrate = Migrate()
 login_manager = LoginManager()
 login_manager.login_view = "auth.login_page"
 login_manager.login_message_category = "info"
+
+
+def setup_log(
+    debug: bool = False, quiet: bool = False, include_timestamp: bool = False
+) -> None:
+    if debug:
+        log_level = logging.DEBUG
+    elif quiet:
+        log_level = logging.CRITICAL
+    else:
+        log_level = logging.INFO
+    logging.basicConfig(level=log_level)
+
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 
 def fill_location_db(app):
@@ -65,5 +80,6 @@ def create_app(config_class=Config):
     app.register_blueprint(ts)
 
     socketio.init_app(app)
+    setup_log()
 
     return app

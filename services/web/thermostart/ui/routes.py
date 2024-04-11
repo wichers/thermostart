@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 
 from thermostart import db
 from thermostart.models import Device, Location
-from thermostart.ts.utils import get_patched_firmware_by_hw_version
+from thermostart.ts.utils import get_firmware, get_firmware_name
 
 ui = Blueprint("ui", __name__)
 
@@ -61,14 +61,14 @@ def thermostatmodel():
 @login_required
 def firmware():
     version = int(request.form["version"])
-
-    data = get_patched_firmware_by_hw_version(
-        version, current_user.host, current_user.port
-    )
-
+    filename = get_firmware_name(version, True)
+    patch = {
+        "hostname": current_user.host,
+        "port": current_user.port,
+        "replace_yourowl.com": True,
+    }
+    data = get_firmware(version, patch)
     response = make_response(data)
     response.headers.set("Content-Type", "text/plain")
-    response.headers.set(
-        "Content-Disposition", "attachment", filename=f"ts_firmware_hw{version}.hex"
-    )
+    response.headers.set("Content-Disposition", "attachment", filename=filename)
     return response

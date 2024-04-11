@@ -1,3 +1,5 @@
+import logging
+
 from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 
@@ -6,6 +8,7 @@ from thermostart.auth.forms import LoginForm, RegistrationForm, UpdateAccountFor
 from thermostart.config import Config
 from thermostart.models import Device, Location
 
+_LOGGER = logging.getLogger(__name__)
 auth = Blueprint("auth", __name__)
 
 

@@ -1,11 +1,12 @@
 import calendar
 import json
+import logging
 import time
 from datetime import datetime, timedelta, timezone
 from urllib.parse import parse_qs
 
 import requests
-from flask import Blueprint, Response, make_response, request
+from flask import Blueprint, Response, jsonify, make_response, request
 from flask_socketio import emit
 
 from thermostart import db
@@ -16,9 +17,10 @@ from .utils import (
     decrypt_request,
     encrypt_response,
     firmware_upgrade_needed,
-    get_patched_firmware_by_hw_version,
+    get_firmware,
 )
 
+_LOGGER = logging.getLogger(__name__)
 ts = Blueprint("ts", __name__)
 
 # tomorrow.io (weather) api key
@@ -33,12 +35,32 @@ def firmware_update():
     arg = arg.split("_")
     hardware_id = arg[1]
 
+    _LOGGER.info(
+        "Got firmare request from %s with hardware id %s and request %s..",
+        request.remote_addr,
+        arg[1],
+        arg[2][:20],
+    )
+
     device = Device.query.get(hardware_id)
     if device is None:
+        _LOGGER.warn(
+            "Device with IP %s and hardware id %s is trying to communicate, but has not been registered.",
+            request.remote_addr,
+            arg[1],
+        )
         return Response(response="no activated device", status=400)
 
-    tsreq = decrypt_request(arg[2], device.password)
-    tsreq = parse_qs(tsreq)
+    try:
+        tsreq = decrypt_request(arg[2], device.password)
+        tsreq = parse_qs(tsreq)
+    except Exception:
+        _LOGGER.warn(
+            "Request from device with IP %s and hardware id %s cannot be decoded.",
+            request.remote_addr,
+            arg[1],
+        )
+        return Response(response="incorrect request", status=400)
 
     # validate decryption and url decoding
     if tsreq["p"][0] != device.password:
@@ -46,20 +68,16 @@ def firmware_update():
 
     hw = int(tsreq["hw"][0])
 
-    print("request to upgrade", hw, tsreq)
+    _LOGGER.info(
+        "Sending patched firmware to %s with hardware id %s, revision %d",
+        request.remote_addr,
+        arg[1],
+        hw,
+    )
 
-    data = get_patched_firmware_by_hw_version(hw, device.host, device.port)
-    if hw < 5:
-        # CHUNK_SIZE = 527
-        # data = encrypt_response(data, device.password)
-        # data_chunks = [
-        #     data[i : i + CHUNK_SIZE] for i in range(20, len(data), CHUNK_SIZE)
-        # ]
-        # data = data[:20] + b"\x00"
-        # data += b"\x00".join(data_chunks)
-        data = encrypt_response(data, device.password)
-    elif hw == 5:
-        data = encrypt_response(data, device.password, False)
+    patch = {"hostname": device.host, "port": device.port, "replace_yourowl.com": True}
+    data = get_firmware(hw, patch)
+    data = encrypt_response(data, device.password)
 
     response = make_response(data)
     response.headers.set("Content-Type", "text/plain")
@@ -113,12 +131,34 @@ def api():
     arg = arg.split("_")
     hardware_id = arg[1]
 
+    _LOGGER.info(
+        "Got api request from %s with hardware id %s and request %s..",
+        request.remote_addr,
+        arg[1],
+        arg[2][:20],
+    )
+
     device = Device.query.get(hardware_id)
     if device is None:
+        _LOGGER.warn(
+            "Device with IP %s and hardware id %s is trying to communicate, but has not been registered.",
+            request.remote_addr,
+            arg[1],
+        )
         return Response(response="no activated device", status=400)
 
-    tsreq = decrypt_request(arg[2], device.password)
-    tsreq = parse_qs(tsreq)
+    try:
+        tsreq = decrypt_request(arg[2], device.password)
+        tsreq = parse_qs(tsreq)
+    except Exception:
+        _LOGGER.warn(
+            "Request from device with IP %s and hardware id %s cannot be decoded.",
+            request.remote_addr,
+            arg[1],
+        )
+        return Response(response="incorrect request", status=400)
+
+    _LOGGER.info("Request %s:%s - %s", request.remote_addr, arg[1], tsreq | {"p": None})
 
     xml = "<ITHERMOSTAT>"
 
@@ -175,8 +215,36 @@ def api():
         device.cal_synced = True
         db.session.commit()
 
-    if "oo" in tsreq:
-        oo = int(tsreq["oo"][0])
+    if int(tsreq["pv"][0]) != device.room_temperature:
+        device.room_temperature = tsreq["pv"][0]
+        db.session.commit()
+        emit(
+            "room_temperature",
+            {"room_temperature": int(tsreq["pv"][0])},
+            namespace="/",
+            to=hardware_id,
+        )
+
+    if kp := tsreq.get("kp"):
+        kp = float(kp[0])
+        if kp != device.kp:
+            device.kp = kp
+            db.session.commit()
+
+    if ti := tsreq.get("ti"):
+        ti = float(ti[0])
+        if ti != device.ti:
+            device.ti = ti
+            db.session.commit()
+
+    if td := tsreq.get("td"):
+        td = float(td[0])
+        if td != device.td:
+            device.td = td
+            db.session.commit()
+
+    if oo := tsreq.get("oo"):
+        oo = int(oo[0])
         if oo != device.oo:
             device.oo = oo
             db.session.commit()
@@ -212,23 +280,24 @@ def api():
         device.hw = hw
         db.session.commit()
 
-    fw = int(tsreq["fw"][0])
+    if hw == 5:
+        fw = int(tsreq["fw"][0][1:])
+    else:
+        fw = int(tsreq["fw"][0])
     if fw != device.fw:
         device.fw = fw
         db.session.commit()
 
-    # do we need to update?
-    # TODO: reverse engineer firmware web guided update process (firmware update process currently stalls at 13%)
-    # print("upgrade needed?", fw, hw)
+    # TODO: further look into why firmware update process leaks and crashes
     # if firmware_upgrade_needed(hw, fw):
     #     xml += "<FW>1</FW>"
 
-    if int(tsreq["pv"][0]) != device.measured_temperature:
-        device.measured_temperature = tsreq["pv"][0]
+    if int(tsreq["pv"][0]) != device.room_temperature:
+        device.room_temperature = tsreq["pv"][0]
         db.session.commit()
         emit(
-            "measured_temperature",
-            {"measured_temperature": int(tsreq["pv"][0])},
+            "room_temperature",
+            {"room_temperature": int(tsreq["pv"][0])},
             namespace="/",
             to=hardware_id,
         )
@@ -252,7 +321,6 @@ def api():
         response = json.loads(response.text)
         outside_temperature = int(response["data"]["values"]["temperature"] * 10)
 
-        print("setting outside temperature to:", outside_temperature)
         xml += f"<BVSET>{outside_temperature}</BVSET>"
         emit(
             "outside_temperature",
@@ -272,20 +340,20 @@ def api():
     # we need to initialize (device probably had a reboot)
     if "init" in tsreq:
 
-        print("device asked for init")
-        print(tsreq)
-
         pause = int(device.source == Source.PAUSE.value)
         xml += f"<PAUSE>{pause}</PAUSE>"
         xml += (
             f"<INIT><SRC>{device.source}</SRC><LOCALE>{device.locale}</LOCALE></INIT>"
         )
-        xml += f"<SVSET>{device.set_temperature}</SVSET>"
+        xml += f"<SVSET>{device.target_temperature}</SVSET>"
         xml += f"<BVSET>{device.outside_temperature}</BVSET>"
         xml += f"<TA>{device.ta}</TA>"
         xml += f"<DIM>{device.dim}</DIM>"
         xml += f"<SLS>{device.sl}</SLS>"
         xml += f"<SD>{device.sd}</SD>"
+        xml += (
+            f"<PID><KP>{device.kp}</KP><TI>{device.ti}</TI><TD>{device.td}</TD></PID>"
+        )
 
     # is there a change from the webinterface?
     elif device.ui_synced is False:
@@ -301,7 +369,7 @@ def api():
         ):
             xml += "<PAUSE>0</PAUSE>"
             xml += f"<INIT><SRC>{device.source}</SRC></INIT>"
-            xml += f"<SVSET>{device.set_temperature}</SVSET>"
+            xml += f"<SVSET>{device.target_temperature}</SVSET>"
         else:
             xml += f"<TA>{device.ta}</TA>"
             xml += f"<DIM>{device.dim}</DIM>"
@@ -317,27 +385,23 @@ def api():
 
         tssrc = int(tsreq["src"][0])
 
-        print("TS Source:", Source(tssrc), "DB:", Source(device.source))
-
         # we're in manual (using TS interface) mode, communicate the manual temperature to our webinterface
         if (
             tssrc == Source.MANUAL.value
             and "csv" in tsreq
-            and int(tsreq["csv"][0]) != device.set_temperature
+            and int(tsreq["csv"][0]) != device.target_temperature
         ):
             device.source = Source.MANUAL.value
             db.session.commit()
             emit(
-                "set_temperature",
-                {"set_temperature": int(tsreq["csv"][0])},
+                "target_temperature",
+                {"target_temperature": int(tsreq["csv"][0])},
                 namespace="/",
                 to=hardware_id,
             )
             emit("source", {"source": tssrc}, namespace="/", to=hardware_id)
 
         elif tssrc == Source.CRASH.value:
-
-            print("we are in crash state")
 
             device.source = Source.STD_WEEK.value
             db.session.commit()
@@ -378,5 +442,74 @@ def api():
 
     xml += "</ITHERMOSTAT>"
 
+    _LOGGER.info("Response %s:%s - %s", request.remote_addr, arg[1], xml)
+
     data = encrypt_response(xml, device.password)
     return Response(response=data, status=200, mimetype="application/octet-stream")
+
+
+@ts.route("/thermostat/<device_id>", methods=["GET", "POST"])
+def thermostat(device_id):
+    device = Device.query.get(device_id)
+    if device is None:
+        return Response(response="no activated device", status=400)
+    if request.method == "GET":
+        return jsonify(
+            name=device.device_id,
+            room_temperature=device.room_temperature,
+            target_temperature=device.target_temperature,
+            outside_temperature=device.outside_temperature,
+            predefined_temperatures=device.predefined_temperatures,
+            standard_week=device.standard_week,
+            exceptions=device.exceptions,
+            source=device.source,
+            firmware=device.fw,
+            ot={
+                "enabled": device.oo,
+                "raw": {
+                    "ot0": device.ot0,
+                    "ot1": device.ot1,
+                    "ot3": device.ot3,
+                    "ot17": device.ot17,
+                    "ot18": device.ot18,
+                    "ot19": device.ot19,
+                    "ot25": device.ot25,
+                    "ot26": device.ot26,
+                    "ot27": device.ot27,
+                    "ot28": device.ot28,
+                    "ot34": device.ot34,
+                    "ot56": device.ot56,
+                    "ot125": device.ot125,
+                },
+            },
+        )
+    else:
+        data = request.json
+
+        if data.get("target_temperature"):
+            device.target_temperature = data.get("target_temperature")
+
+        if data.get("exceptions"):
+            device.exceptions = data.get("exceptions")
+
+        if data.get("standard_week"):
+            device.standard_week = data.get("standard_week")
+
+        if data.get("predefined_temperatures"):
+            device.predefined_temperatures = data.get("predefined_temperatures")
+
+        if data.get("outside_temperature"):
+            device.outside_temperature = data.get("outside_temperature")
+
+        if data.get("room_temperature"):
+            device.room_temperature = data.get("room_temperature")
+
+        if data.get("pause"):
+            device.room_temperature = data.get("pause")
+            device.ui_synced = False
+            device.ui_source = "pause_button"
+            device.source = Source.PAUSE.value
+
+        device.commit()
+
+    return Response(response="invalid method", status=400)

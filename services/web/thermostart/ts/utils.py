@@ -399,7 +399,7 @@ if __name__ == "__main__":
         subparser.add_argument(
             "--enablepatch",
             action=argparse.BooleanOptionalAction,
-            help=" --enablePatch firmware?",
+            help="disable stock firmware and enable patching",
         )
         subparser.add_argument(
             "--patch-hostname",
@@ -413,7 +413,7 @@ if __name__ == "__main__":
         subparser.add_argument(
             "--do-not-patch-yourowl",
             action=argparse.BooleanOptionalAction,
-            help="Allow existance of my.yourowl.com or hw.yourowl.com in this firmware",
+            help="Allow existence of my.yourowl.com or hw.yourowl.com in this firmware",
         )
     args = parser.parse_args()
     if not args.command:

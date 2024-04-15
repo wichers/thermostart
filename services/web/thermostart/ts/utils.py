@@ -349,7 +349,7 @@ def get_firmware(hw, patch=None):
     if hw < 0 or hw > 5:
         raise Exception("no compatible firmware available")
 
-    filename = "TS_HW{}_{}.HEX".format(hw, FIRMWARE_VERSIONS[hw]["sw"])
+    filename = "TS_HW{}_{}.hex".format(hw, FIRMWARE_VERSIONS[hw]["sw"])
     filename = os.path.join(os.getenv("APP_FOLDER"), "firmware", filename)
 
     if len(patch) > 0:

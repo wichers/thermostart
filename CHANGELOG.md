@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.3
+- fixed error on lowercase extension
+
 ## 1.0.2
 - removed 17 chars hostname length limit
 - added HW1 and HW5 support

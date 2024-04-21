@@ -425,19 +425,20 @@ def api():
 
     updatetime = False
     if "ts" in tsreq:
-        now = datetime.utcnow()
-        ts_req = datetime.fromtimestamp(int(tsreq["ts"][0]))
-        if ts_req + timedelta(seconds=60) > now or ts_req - timedelta(seconds=60) < now:
+        # Time on thermostat must be updated when difference is greater than 60 seconds
+        now = int(time.time()) + 61
+        ts_req = int(tsreq["ts"][0])
+        if abs(ts_req - now) > 60:
             updatetime = True
     else:
         updatetime = True
 
     if updatetime:
         # Time (GMT) in seconds
-        xml += f"<TS>{calendar.timegm(time.gmtime())}</TS>"
+        xml += f"<TS>{int(time.time())}</TS>"
 
     # time zone offset in minutes (signed).
-    tz = device.utc_offset_in_seconds() / 60
+    tz = int(device.utc_offset_in_seconds() / 60)
     xml += f"<TZ>{tz}</TZ>"
 
     xml += "</ITHERMOSTAT>"

@@ -426,7 +426,7 @@ def api():
     updatetime = False
     if "ts" in tsreq:
         # Time on thermostat must be updated when difference is greater than 60 seconds
-        now = int(time.time()) + 61
+        now = int(time.time())
         ts_req = int(tsreq["ts"][0])
         if abs(ts_req - now) > 60:
             updatetime = True

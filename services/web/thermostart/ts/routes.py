@@ -456,7 +456,7 @@ def thermostat(device_id):
         return Response(response="no activated device", status=400)
     if request.method == "GET":
         return jsonify(
-            name=device.device_id,
+            name=device.hardware_id,
             room_temperature=device.room_temperature,
             target_temperature=device.target_temperature,
             outside_temperature=device.outside_temperature,
